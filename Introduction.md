@@ -1,48 +1,47 @@
-# Introduction
+# 引言
 
-## Detect and exploit a SQL injection
+## 发现并利用SQL注入
 
-Let's say that you are auditing a web application and found a web page that accepts dynamic user-provided values via `GET`, `POST` or `Cookie` parameters or via the HTTP `User-Agent` request header.
-You now want to test if these are affected by a SQL injection vulnerability, and if so, exploit them to retrieve as much information as possible from the back-end database management system, or even be able to access the underlying file system and operating system.
+我们首先假设你正在审查一个网络应用，在这个应用中，你发现了通过`GET`, `POST` 或 `Cookie`参数或者HTTP `User-Agent` 请求报头使用户能动态上传自己的数据的网页。
+那么，你需要做的便是测试这个网页是否易受SQL注入攻击，如果是这样的话，你就可以利用它们从后端数据库管理系统中检索到尽可能多的信息，你甚至可以接触到底层的文件系统和操作系统。
 
-In a simple world, consider that the target url is:
+简单来说，假定目标url是：
 
     http://192.168.136.131/sqlmap/mysql/get_int.php?id=1
 
-Assume that:
+假设：
 
     http://192.168.136.131/sqlmap/mysql/get_int.php?id=1+AND+1=1
 
-is the same page as the original one and (the condition evaluates to **True**):
+是与源目标相同的网页（条件为真）：
 
     http://192.168.136.131/sqlmap/mysql/get_int.php?id=1+AND+1=2
 
-differs from the original one (the condition evaluates to **False**). This likely means that you are in front of a SQL injection vulnerability in the `id` `GET` parameter of the `index.php` page. Additionally, no sanitisation of user's supplied input is taking place before the SQL statement is sent to the back-end database management system.
+但与原链接不同（条件为假）。这就好比你面对着一个`index.php` page中含有 `id` `GET`元素的SQL injection漏洞，除此之外，在SQL报表送达后端数据库管理系统之前，用户提供的输入还没有经过过滤。
 
-This is quite a common flaw in dynamic content web applications and it does not depend upon the back-end database management system nor on the web application programming language; it is a flaw within the application code. The [Open Web Application Security Project](http://www.owasp.org) rated this class of vulnerability as the [most common](https://owasptop10.googlecode.com/files/OWASP%20Top%2010%20-%202013.pdf) and serious web application vulnerability in their [Top Ten](http://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project) list from 2013.
+这在动态目录网络应用中是非常常见的一种瑕疵，同时，它并不依赖于后端数据库管理系统，也不依赖于网络应用编程语言，这是应用程序代码中的瑕疵。开放式网络应用安全项目（[Open Web Application Security Project](http://www.owasp.org)）把这类漏洞列为2013年以来[十大](http://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project)[最广泛](https://owasptop10.googlecode.com/files/OWASP%20Top%2010%20-%202013.pdf)最危险的网络应用漏洞之一。 
 
-Now that you have found the vulnerable parameter, you can exploit it by manipulating the `id` parameter value in the HTTP request.
+既然已经发现了漏洞，你便可以通过操控HTTP请求中的`id`元素赋值来利用它。
 
-Back to the scenario, we can make an educated guess about the probable syntax of the SQL `SELECT` statement where the user supplied value is being used in the `get_int.php` web page. In pseudo PHP code:
+回到刚刚的情境，我们可以对SQL`SELECT`报表的语法做有根据的猜想，在这个报表中，`get_int.php`网页用到了用户提供的数据。在假的PHP代码中：
 
     $query = "SELECT [column name(s)] FROM [table name] WHERE id=" . $_REQUEST['id'];
 
-As you can see, appending a syntactically valid SQL statement that will evaluate to a **True** condition after the value for the `id` parameter (such as `id=1 AND 1=1`) will result in the web application returning the same web page as in the original request (where no SQL statement is added). This is because the back-end database management system has evaluated the injected SQL statement. The previous example describes a simple boolean-based blind SQL injection vulnerability.  However, sqlmap is able to detect any type of SQL injection flaw and adapt its work-flow accordingly.
+可以看到，给`id`元素赋值后（如`id=1 AND 1=1`），在末尾加上语法上有效的并使条件为真的SQL报表将导致网络应用回到与原始请求一样的网页上（未加SQL报表的网页），这是因为后端数据库管理系统已经evaluated被注入的SQL报表。上面这个例子描述了基于布尔运算的SQL盲注漏洞。
+但是，sqlmap能够发现所有类型的SQL注入瑕疵并且据此更新它的工作流程。
 
-In this simple scenario it would also be possible to append, not just one or more valid SQL conditions, but also (depending on the DBMS) stacked SQL queries. For instance:  `[...]&id=1;ANOTHER SQL QUERY#`.
+在这个简单的情境中，不仅仅是一个或多个有效的SQL条件会被加在末尾，堆叠的SQL查询也有可能（取决于DBMS）。例如：  `[...]&id=1;ANOTHER SQL QUERY#`.
 
-sqlmap can automate the process of identifying and exploiting this type of vulnerability. Passing the original address, `http://192.168.136.131/sqlmap/mysql/get_int.php?id=1` to sqlmap, the tool will automatically:
+sqlmap会自动运行识别并利用这些类型的漏洞的程序。将原始地址`http://192.168.136.131/sqlmap/mysql/get_int.php?id=1` 传递给sqlmap，它将自动：
 
-* Identify the vulnerable parameter(s) (`id` in this example)
-* Identify which SQL injection techniques can be used to exploit the vulnerable parameter(s)
-* Fingerprint the back-end database management system
-* Depending on the user's options, it will extensively fingerprint, enumerate data or takeover the database server as a whole
+* 识别有漏洞的参数（比如例子中的`id` ）
+* 识别使用哪种SQL注入工具可以利用这些有漏洞的参数
+* 为后端数据库管理系统采指纹
+* 基于用户的选择，它可以扩大指纹采集，枚举数据或整体接管数据库服务器
 
-...and depending on supplied options, it will enumerate data or takeover the database server entirely.
+...根据提供的选项，它可以枚举数据或整体接管数据库服务器
 
-There exist many [resources](https://del.icio.us/inquis/sqlinjection) on the web explaining in depth how to detect, exploit and prevent SQL injection vulnerabilities in web applications. It is recommendeded that you read them before going much further with sqlmap.
+网络上有很多[资源](https://del.icio.us/inquis/sqlinjection)深入地解释了如何发现、利用和阻止网络应用中的SQL注入漏洞，建议看看这些之后再进行下一步的sqlmap学习。
 
-## Direct connection to the database management system
-Up until sqlmap version **0.8**, the tool has been **yet another SQL injection tool**, used by web application penetration testers/newbies/curious teens/computer addicted/punks and so on. Things move on
-and as they evolve, we do as well. Now it supports this new switch, `-d`, that allows you to connect from your machine to the database server's TCP port where the database management system daemon is listening
-on and perform any operation you would do while using it to attack a database via a SQL injection vulnerability.
+## 与数据库管理系统直接相连
+到了sqlmap**0.8**, 它已经变成了**另外一种SQL注入工具**, 常常被网络应用渗透测试员、初学者、好奇的青少年、电脑发烧友以及庞克族使用。时代不断发展，他们在进步的同时我们也一样。现在它支持一种新的交换机， `-d`，这可以使你的计算机连接上数据库服务器的TCP端口，尽管数据库管理系统的后台程序正在侦听，在利用它通过SQL注入漏洞攻击数据库的时候，它会为你执行你想要的任何操作。

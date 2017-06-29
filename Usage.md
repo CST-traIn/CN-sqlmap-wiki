@@ -1030,23 +1030,23 @@ If for any instance you want to perform an extensive database management system 
 
 If you want the fingerprint to be even more accurate result, you can also provide the switch `-b` or `--banner`. 
 
-## Enumeration
+## 枚举
 
-These options can be used to enumerate the back-end database management system information, structure and data contained in the tables. Moreover you can run your own SQL statements. 
+这些选项可用于枚举表中包含的后端数据库管理系统信息、结构和数据。此外，还可以运行自己的SQL语句。
 
-### Retrieve all
+### 检索全部
 
-Switch: `--all`
+开关: `--all`
 
-This switch can be used in situations where user wants to retrieve everything remotely accessible by using a single switch. This is not recommended as it will generate large number of requests retrieving both useful and unuseful data.
+这个开关可以在用户想通过使用一个开关来检索所有远程访问的情况下使用。这是不推荐的，因为它将生成大量请求检索有用和无用的数据。
 
-### Banner
+### 标语
 
-Switch: `-b` or `--banner`
+开关: `-b` or `--banner`
 
-Most of the modern database management systems have a function and/or  an environment variable which returns the database management system version and eventually details on its patch level, the underlying system. Usually the function is `version()` and the environment variable is `@@version`, but this vary depending on the target DBMS. 
+大多数现代数据库管理系统都有一个函数和/或一个环境变量，该变量返回数据库管理系统版本，并最终在其补丁级别(底层系统)上详细说明。通常函数是 `version()` 而环境变量是 `@@version`，但这取决于目标DBMS。
 
-Example against an Oracle target:
+反对Oracle目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/oracle/get_int.php?id=1" -\
@@ -1059,25 +1059,25 @@ back-end DBMS: Oracle
 banner:    'Oracle Database 10g Enterprise Edition Release 10.2.0.1.0 - Prod'
 ```
 
-### Session user
+### 会话用户
 
-Switch: `--current-user`
+开关: `--current-user`
 
-With this switch it is possible to retrieve the database management system's user which is effectively performing the query against the back-end DBMS from the web application. 
+有了这个开关，就可以检索数据库管理系统的用户，该用户实际上是通过web应用程序对后端DBMS执行查询。
 
-### Current database
+### 当前数据库
 
-Switch: `--current-db`
+开关: `--current-db`
 
-With this switch it is possible to retrieve the database management system's database name that the web application is connected to.
+使用此开关，可以检索web应用程序连接到的数据库管理系统的数据库名称。
 
-### Server hostname
+### 服务器主机名
 
-Switch: `--hostname`
+开关: `--hostname`
 
-With this switch it is possible to retrieve the database management system's hostname.
+使用这个开关，可以检索数据库管理系统的主机名。
 
-Example against a MySQL target:
+针对MySQL目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/mysql/get_int.php?id=1" --\
@@ -1089,25 +1089,25 @@ hostname
 hostname:    'debian-5.0-i386'
 ```
 
-### Detect whether or not the session user is a database administrator
+### 检测会话用户是否是数据库管理员
 
-Switch: `--is-dba`
+开关: `--is-dba`
 
-It is possible to detect if the current database management system session user is a database administrator, also known as DBA. sqlmap will return `True` if it is, vice versa `False`. 
+如果当前的数据库管理系统会话用户是数据库管理员，也称为DBA，则可以检测到它。如果是，sqlmap将返回 `True` ，反之亦然。
 
-### List database management system users
+### 列出数据库管理系统的用户
 
-Switch: `--users`
+开关: `--users`
 
-When the session user has read access to the system table containing information about the DBMS users, it is possible to enumerate the list of users. 
+当会话用户读取包含DBMS用户信息的系统表时，可以枚举用户列表。
 
-### List and crack database management system users password hashes
+### 列表和破解数据库管理系统用户密码散列
 
-Switch: `--passwords`
+开关: `--passwords`
 
-When the session user has read access to the system table containing information about the DBMS users' passwords, it is possible to enumerate the password hashes for each database management system user. sqlmap will first enumerate the users, then the different password hashes for each of them. 
+当会话用户读取包含关于DBMS用户密码信息的系统表的访问时，可以为每个数据库管理系统用户枚举密码散列。sqlmap将首先枚举用户，然后对每个用户进行不同的密码散列。
 
-Example against a PostgreSQL target:
+针对PostgreSQL目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/pgsql/get_int.php?id=1" --\
@@ -1133,63 +1133,64 @@ database management system users password hashes:
     clear-text password: testpass
 ```
 
-Not only sqlmap enumerated the DBMS users and their passwords, but it also recognized the hash format to be PostgreSQL, asked the user whether or not to test the hashes against a dictionary file and identified the clear-text password for the `postgres` user, which is usually a DBA along the other user, `testuser`, password. 
+sqlmap不仅枚举DBMS用户和密码,同时，它也能识别出是PostgreSQL的散列格式,问用户是否要对字典文件进行测试，并且为postgres的用户确认明文密码,这通常沿着其他用户的DBA,`testuser`,密码。
 
-This feature has been implemented for all DBMS where it is possible to enumerate users' password hashes, including Oracle and Microsoft SQL Server pre and post 2005. 
+这个特性已经在所有DBMS中实现，在那里可以枚举用户的密码散列，包括Oracle和Microsoft SQL Server pre和post 2005。
 
-You can also provide the option `-U` to specify the specific user who you want to enumerate and eventually crack the password hash(es). If you provide `CU` as username it will consider it as an alias for current user and will retrieve the password hash(es) for this user. 
+您还可以提供选项 `-U` 来指定要枚举的特定用户，并最终破解密码散列。如果您提供 `CU` 作为用户名，它将把它视为当前用户的别名，并将为该用户检索密码散列。
 
-### List database management system users privileges
+### 列表数据库管理系统用户权限
 
-Switch: `--privileges`
+开关: `--privileges`
 
-When the session user has read access to the system table containing information about the DBMS users, it is possible to enumerate the privileges for each database management system user. By the privileges, sqlmap will also show you which are database administrators.
+当会话用户访问包含DBMS用户信息的系统表时，可以枚举每个数据库管理系统用户的特权。通过特权，sqlmap还将显示哪些是数据库管理员。
 
-You can also provide the option `-U` to specify the user who you want to enumerate the privileges.
+您还可以提供选项 `-U` 来指定要枚举特权的用户。
 
-If you provide `CU` as username it will consider it as an alias for current user and will enumerate the privileges for this user. 
+如果您提供 `CU` 作为用户名，它将把它视为当前用户的别名，并将枚举该用户的特权。
 
-On Microsoft SQL Server, this feature will display you whether or not each user is a database administrator rather than the list of privileges for all users.
+在Microsoft SQL Server上，这个特性将显示每个用户是否是数据库管理员，而不是所有用户的特权列表。
 
-### List database management system users roles
+### 列表数据库管理系统用户角色
 
-Switch: `--roles`
+开关: `--roles`
 
-When the session user has read access to the system table containing information about the DBMS users, it is possible to enumerate the roles for each database management system user.
+当会话用户读取到包含DBMS用户信息的系统表时，可以枚举每个数据库管理系统用户的角色。
 
-You can also provide the option `-U` to specify the user who you want to enumerate the privileges.
+您还可以提供选项 `-U` 来指定要枚举特权的用户。
 
-If you provide `CU` as username it will consider it as an alias for current user and will enumerate the privileges for this user.
+如果您提供 `CU` 作为用户名，它将把它视为当前用户的别名，并将枚举该用户的特权。
 
-This feature is only available when the DBMS is Oracle.
+只有当DBMS是Oracle时，该特性才可用。
 
-### List database management system's databases
+### List数据库管理系统的数据库
 
-Switch: `--dbs`
+开关: `--dbs`
 
-When the session user has read access to the system table containing information about available databases, it is possible to enumerate the list of databases. 
+当会话用户读取包含可用数据库信息的系统表的访问时，可以枚举数据库列表。
 
-### Enumerate database's tables
+### 列举数据库的表
 
-Switches and option: `--tables`, `--exclude-sysdbs` and `-D`
+开关和选项: `--tables`, `--exclude-sysdbs` 和 `-D`
 
-When the session user has read access to the system table containing information about databases' tables, it is possible to enumerate the list of tables for a specific database management system's databases.
+当会话用户读取包含数据库表信息的系统表时，可以枚举特定数据库管理系统数据库的表列表。
 
-If you do not provide a specific database with option `-D`, sqlmap will enumerate the tables for all DBMS databases.
+如果您不提供特定的数据库选项`-D`，sqlmap将枚举所有DBMS数据库的表。
 
-You can also provide the switch `--exclude-sysdbs` to exclude all system databases.
+您还可以提供开关`--exclude-sysdbs`来排除所有系统数据库。
 
-Note that on Oracle you have to provide the `TABLESPACE_NAME` instead of the database name.
+请注意，在Oracle上必须提供`TABLESPACE_NAME`而不是数据库名。
 
-### Enumerate database table columns
+### 列举数据库表列
 
-Switch and options: `--columns`, `-C`, `-T` and `-D`
+开关和选项: `--columns`, `-C`, `-T` 和 `-D`
 
-When the session user has read access to the system table containing information about database's tables, it is possible to enumerate the list of columns for a specific database table. sqlmap also enumerates the data-type for each column. 
+当会话用户读取包含数据库表信息的系统表时，可以枚举特定数据库表的列列表。sqlmap还枚举每个列的数据类型。
 
-This feature depends on option `-T` to specify the table name and optionally on `-D` to specify the database name. When the database name is not specified, the current database name is used. You can also provide the `-C` option to specify the table columns name like the one you provided to be enumerated.
 
-Example against a SQLite target:
+该特性依赖于选项`-T` 来指定表名，并可选在`-D`上指定数据库名称。当没有指定数据库名称时，将使用当前数据库名称。您还可以提供 `-C`选项来指定表列名称，如您所提供的枚举类型。
+
+针对SQLite目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/sqlite/get_int.php?id=1" -\
@@ -1207,15 +1208,15 @@ Table: users
 +---------+---------+
 ```
 
-Note that on PostgreSQL you have to provide `public` or the name of a system database. That's because it is not possible to enumerate  other databases tables, only the tables under the schema that the web application's user is connected to, which is always aliased by `public`. 
+请注意，在PostgreSQL上必须提供`public`或系统数据库的名称。这是因为不可能枚举其他数据库表，只有在web应用程序的用户连接到的模式下的表，它总是被`public`所定义。
 
-### Enumerate database management system schema
+### 枚举数据库管理系统模式
 
-Switches: `--schema` and `--exclude-sysdbs`
+开关: `--schema` 和 `--exclude-sysdbs`
 
-User can retrieve a DBMS schema by using this switch. Schema listing will contain all databases, tables and columns, together with their respective types. In combination with `--exclude-sysdbs` only part of the schema containing non-system databases will be retrieved and shown.
+用户可以通过使用这个开关来检索DBMS模式。模式清单将包含所有数据库、表和列，以及它们各自的类型。与`--exclude-sysdbs`相结合，将检索并显示包含非系统数据库的模式的一部分。
 
-Example against a MySQL target:
+针对MySQL目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.48.130/sqlmap/mysql/get_int.php?id=1" --s\
@@ -1273,13 +1274,13 @@ Table: users
 [...]
 ```
 
-### Retrieve number of entries for table(s)
+### 检索表的条目数
 
-Switch: `--count`
+开关: `--count`
 
-In case that user wants just to know the number of entries in table(s) prior to dumping the desired one, he can use this switch.
+如果用户只想知道在转储所需的表之前的表中的条目数，他可以使用这个开关。
 
-Example against a Microsoft SQL Server target:
+针对Microsoft SQL服务器目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.21.129/sqlmap/mssql/iis/get_int.asp?id=1"\
@@ -1294,15 +1295,15 @@ Database: testdb
 +----------------+---------+
 ```
 
-### Dump database table entries
+### 把数据库表条目
 
-Switch and options: `--dump`, `-C`, `-T`, `-D`, `--start`, `--stop`, `--first`, `--last`, `--pivot-column` and `--where`
+开关和选项: `--dump`, `-C`, `-T`, `-D`, `--start`, `--stop`, `--first`, `--last`, `--pivot-column` 和 `--where`
 
-When the session user has read access to a specific database's table it is possible to dump the table entries.
+当会话用户访问特定数据库的表时，可以转储表项。
 
-This functionality depends on option `-T` to specify the table name and optionally on option `-D` to specify the database name. If the table name is provided, but the database name is not, the current database name is used.
+这个功能依赖于选项`-T`来指定表名，或者选择`-D` 来指定数据库名称。如果提供了表名，但数据库名不是，则使用当前数据库名称。
 
-Example against a Firebird target:
+针对Firebird目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/firebird/get_int.php?id=1"\
@@ -1321,55 +1322,56 @@ Table: USERS
 +----+--------+------------+
 ```
 
-This switch can also be used to dump all tables' entries of a provided database. You simply have to provide sqlmap with the switch `--dump` along with only the option `-D` (no `-T` and no `-C`).
+这个开关还可以用来转储提供的数据库的所有表的条目。你只需要提供sqlmap和开关`--dump`以及只有选项`-D`(不用`-T`和`-C`)。
 
-You can also provide a comma-separated list of the specific columns to dump with the option `-C`.
+您还可以提供与选项 `-C`转储的特定列的逗号分隔列表。
 
-sqlmap also generates for each table dumped the entries in a CSV format textual file. You can see the absolute path where sqlmap creates the file by providing a verbosity level greater than or equal to **1**.
+sqlmap也为每个表生成一个CSV格式文本文件中的条目。通过提供大于或等于**1**的赘言级别，可以看到sqlmap创建文件的绝对路径。
 
-If you want to dump only a range of entries, then you can provide options `--start` and/or `--stop` to respectively start to dump from a certain entry and stop the dump at a certain entry. For instance, if you want to dump only the first entry, provide `--stop 1` in your command line. Vice versa if, for instance, you want to dump only the second and third entry, provide `--start 1` `--stop 3`.
+如果您只想转储一系列的条目，那么您可以提供选项 `--start`和/或`--stop`，分别从某个条目开始转储，并在某个条目中停止转储。例如，如果只想转储第一个条目，则在命令行中提供`--stop 1` 。反之亦然，例如，如果您想只转储第二个和第三个条目，则提供`--start 1` `--stop 3`。
 
-It is also possible to specify which single character or range of characters to dump with options `--first` and `--last`. For instance, if you want to dump columns' entries from the third to the fifth character, provide `--first 3` `--last 5`. This feature only applies to the blind SQL injection techniques because for error-based and UNION query SQL injection techniques the number of requests is exactly the same, regardless of the length of the column's entry output to dump.
+还可以指定要转储哪些单个字符或字符的范围`--first` 和 `--last`。例如，如果您想将列的条目从第三个字符转储到第五个字符，则提供`--first 3` `--last 5`。这个特性只适用于盲SQL注入技术，因为对于基于errorsql的和UNION查询SQL注入技术，请求的数量是完全相同的，无论列的输入输出的长度是多少。
 
-Sometimes (e.g. for Microsoft SQL Server, Sybase and SAP MaxDB) it is not possible to dump the table rows straightforward by using `OFFSET m, n` mechanism because of lack of similar. In such cases sqlmap dumps the content by determining the most suitable `pivot` column (the one with most unique values) whose values are used later on for retrieval of other column values. If it is necessary to enforce the usage of particular `pivot` column because the automatically chosen one is not suitable (e.g. because of lack of table dump results) you can use option `--pivot-column` (e.g. `--pivot-column=id`).
+有时(例如，对于Microsoft SQL Server、Sybase和SAP MaxDB)，使用`OFFSET m, n`机制来直接转储表行是不可能的，因为缺少类似的机制。在这种情况下，sqlmap通过确定最合适的`pivot`列(具有最独特的值的)来转储内容，这些值稍后将用于检索其他列值。如果需要执行特定的`pivot`列的使用，因为自动选择的一个不合适(例如由于缺少表转储结果)，您可以使用选项`--pivot-column`(例如，`--pivot-column=id`)。
 
-In case that you want to constraint the dump to specific column values (or ranges) you can use option `--where`. Provided logical operation will be automatically used inside the `WHERE` clause. For example, if you use `--where="id>3"` only table rows having value of column `id` greater than 3 will be retrieved (by appending `WHERE id>3` to used dumping queries).
+如果您希望将转储限制为特定的列值(或范围)，则可以使用选项 `--where`。在`WHERE`子句中，提供了逻辑操作。例如，如果使用`--where="id>3"`唯一表行具有大于3的列`id`值的表行将会被检索(通过追加 `WHERE id>3` 来使用转储查询)。
 
-As you may have noticed by now, sqlmap is **flexible**: you can leave it to automatically dump the whole database table or you can be very precise in which characters to dump, from which columns and which range of entries.
+正如您现在已经注意到的，sqlmap是 **灵活的**:您可以让它自动转储整个数据库表，或者您可以非常精确地从哪个字符转储，从哪个列和哪个范围的条目中转储。
 
-### Dump all databases tables entries
 
-Switches: `--dump-all` and `--exclude-sysdbs`
+### 转储所有数据库表条目
 
-It is possible to dump all databases tables entries at once that the session user has read access on.
+开关: `--dump-all` 和 `--exclude-sysdbs`
 
-You can also provide the switch `--exclude-sysdbs` to exclude all system databases. In that case sqlmap will only dump entries of users' databases tables.
+可以立即转储所有数据库表条目，会话用户可以读取访问。
 
-Note that on Microsoft SQL Server the `master` database is not considered a system database because some database administrators use it as a users' database.
+您还可以提供开关 `--exclude-sysdbs` 来排除所有系统数据库。在这种情况下，sqlmap只会转储用户数据库表的条目。
 
-### Search for columns, tables or databases
+注意，在Microsoft SQL Server上，`master` 数据库不被视为系统数据库，因为一些数据库管理员将其用作用户数据库。
 
-Switch and options: `--search`, `-C`, `-T`, `-D`
+### 搜索列、表或数据库
 
-This switch allows you to **search for specific database names, specific tables across all databases or specific columns across all databases' tables**. 
+开关和选项: `--search`, `-C`, `-T`, `-D`
 
-This is useful, for instance, to identify tables containing custom application credentials where relevant columns' names contain string like _name_ and _pass_.
+这个开关允许您 **搜索特定的数据库名称、跨所有数据库的特定表或跨所有数据库表的特定列。**. 
 
-Switch `--search` needs to be used in conjunction with one of the following support options:
+例如，这对于识别包含自定义应用程序凭据的表是有用的，在这些表中，相关列的名称包含_name_和_pass_等字符串。
 
-* `-C` following a list of comma-separated column names to look for across the whole database management system.
-* `-T` following a list of comma-separated table names to look for across the whole database management system.
-* `-D` following a list of comma-separated database names to look for across the database management system.
+开关`--search`需要与以下支持选项之一一起使用:
 
-### Run custom SQL statement
+* `-C` 遵循逗号分隔的列名列表，以便在整个数据库管理系统中查找。
+* `-T` 遵循逗号分隔的表名，以便在整个数据库管理系统中查找。
+* `-D` 遵循逗号分隔的数据库名称来查找整个数据库管理系统。
 
-Option and switch: `--sql-query` and `--sql-shell`
+### 运行自定义SQL语句
 
-The SQL query and the SQL shell features allow to run arbitrary SQL statements on the database management system. sqlmap automatically dissects the provided statement, determines which technique is appropriate to use to inject it and how to pack the SQL payload accordingly. 
+选项和开关: `--sql-query` 和 `--sql-shell`
 
-If the query is a `SELECT` statement, sqlmap will retrieve its output. Otherwise it will execute the query through the stacked query SQL injection technique if the web application supports multiple statements on the back-end database management system. Beware that some web application technologies do not support stacked queries on specific database management systems. For instance, PHP does not support stacked queries when the back-end DBMS is MySQL, but it does support when the back-end DBMS is PostgreSQL.
+SQL查询和SQL shell特性允许在数据库管理系统上运行任意的SQL语句。sqlmap会自动地剖析所提供的语句，确定使用哪种技术注入它以及如何相应地打包SQL有效负载。
 
-Examples against a Microsoft SQL Server 2000 target:
+如果查询是`SELECT`语句，sqlmap将检索其输出。否则，如果web应用程序支持后端数据库管理系统上的多个语句，它将通过堆叠查询SQL注入技术来执行查询。请注意，某些web应用程序技术不支持对特定的数据库管理系统进行堆叠查询。例如，当后端DBMS是MySQL时，PHP不支持堆叠查询，但它支持后端DBMS是PostgreSQL。
+
+针对Microsoft SQL Server 2000目标的示例:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/mssql/get_int.php?id=1" --\
@@ -1399,32 +1401,33 @@ RCHAR(8000)), (CHAR(32)))
 SELECT 'foo', 'bar':    'foo, bar'
 ```
 
-As you can see, sqlmap splits the provided query into two different `SELECT` statements then retrieves the output for each separate query. 
+如您所见，sqlmap将提供的查询拆分为两个不同的 `SELECT` statements then retrieves the output for each separate query. 
 
-If the provided query is a `SELECT` statement and contains a `FROM` clause, sqlmap will ask you if such statement can return multiple entries. In that case the tool knows how to unpack the query correctly to count the number of possible entries and retrieve its output, entry per entry. 
+如果提供的查询是一个 `SELECT`语句并包含一个`FROM`子句，sqlmap将询问这样的语句是否可以返回多个条目。在这种情况下，该工具知道如何正确地解压查询，以计数可能的条目的数量并检索它的输出，每个条目的条目。
 
-The SQL shell option allows you to run your own SQL statement interactively, like a SQL console connected to the database management system. This feature provides TAB completion and history support too. 
+SQL shell选项允许您交互式地运行自己的SQL语句，就像连接到数据库管理系统的SQL控制台一样。这个功能也提供了标签完成和历史支持。
+破解
 
-## Brute force
+### 暴力
 
-These switches can be used to run brute force checks.
+这些开关可以用来运行暴力检查。
 
-### Brute force tables names
+### 暴力表名称
 
-Switch: `--common-tables`
+开关: `--common-tables`
 
-There are cases where switch `--tables` can not be used to retrieve the databases' table names. These cases usually fit into one of the following categories: 
+有些情况下，开关`--tables`不能用于检索数据库的表名。这些案件通常属于以下类别之一:
 
-* The database management system is MySQL **< 5.0** where `information_schema` is not available.
-* The database management system is Microsoft Access and system table `MSysObjects` is not readable - default setting.
-* The session user does not have read privileges against the system table storing the scheme of the databases.
+* 数据库管理系统是MySQL **< 5.0** ，在这里不提供 `information_schema`。
+* 数据库管理系统是Microsoft Access，系统表 `MSysObjects` 是不可读的 - 默认设置。
+* 会话用户不具有对存储数据库方案的系统表的权限。
 
-If any of the first two cases apply and you provided the switch `--tables`, sqlmap will prompt you with a question
-to fall back to this technique. Either of these cases apply to your situation, sqlmap can possibly still identify some existing tables if you provide it with the switch `--common-tables`. sqlmap will perform a brute-force attack in order to detect the existence of common tables across the DBMS.
+如果前两个案例中的任何一个应用，并且您提供了开关 `--tables`，sqlmap将提示您一个问题
+回到这个技巧。这两种情况中的任何一个都适用于您的情况，sqlmap可能仍然可以识别一些现有的表，如果您提供了开关 `--common-tables`。sqlmap将执行蛮力攻击，以检测DBMS中常见表的存在。
 
-The list of common table names is `txt/common-tables.txt` and you can edit it as you wish.
+常用表名的列表是 `txt/common-tables.txt` 。你可以随意编辑它。
 
-Example against a MySQL 4.1 target:
+针对MySQL 4.1目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.129/mysql/get_int_4.php?id=1" --commo\
@@ -1454,50 +1457,50 @@ Database: testdb
 +-------+
 ```
 
-### Brute force columns names
+### 暴力列名
 
-Switch: `--common-columns`
+开关: `--common-columns`
 
-As per tables, there are cases where switch `--columns` can not be used to retrieve the databases' tables' column names. These cases usually fit into one of the following categories: 
+根据表，有一些情况下，开关 `--columns`不能用于检索数据库的表的列名。这些案件通常属于以下类别之一: 
 
-* The database management system is MySQL **< 5.0** where `information_schema` is not available.
-* The database management system is Microsoft Access where this kind of information is not available inside system tables.
-* The session user does not have read privileges against the system table storing the scheme of the databases.
+* 数据库管理系统是MySQL**< 5.0**，没有提供`information_schema` 。
+* 数据库管理系统是Microsoft Access，这种信息在系统表中是不可用的。
+* 会话用户不具有对存储数据库方案的系统表的权限。
 
-If any of the first two cases apply and you provided the switch `--columns`, sqlmap will prompt you with a question
-to fall back to this technique. Either of these cases apply to your situation, sqlmap can possibly still identify some existing tables if you provide it with the switch `--common-columns`. sqlmap will perform a brute-force attack in order to detect the existence of common columns across the DBMS.
+如果前两个案例中的任何一个应用，并且您提供了开关 `--columns`，sqlmap将提示您一个问题
+回到这个技巧。这两种情况中的任何一个都适用于您的情况，sqlmap可能仍然可以识别一些现有的表，如果您提供了开关`--common-columns`。sqlmap将执行暴力攻击，以检测DBMS中常见的列的存在。
 
-The list of common table names is `txt/common-columns.txt` and you can edit it as you wish.
+常用表名的列表是`txt/common-columns.txt`。你可以随意编辑它。
 
-## User-defined function injection
+## 用户定义函数注入
 
-These options can be used to create custom user-defined functions.
+这些选项可用于创建自定义用户定义的函数。
 
-### Inject custom user-defined functions (UDF)
+### 注入自定义用户定义函数(UDF)
 
-Switch and option: `--udf-inject` and `--shared-lib`
+开关和选项: `--udf-inject` 和 `--shared-lib`
 
-You can inject your own user-defined functions (UDFs) by compiling a MySQL or PostgreSQL shared library, DLL for Windows and shared object for Linux/Unix, then provide sqlmap with the path where the shared library is stored locally on your machine. sqlmap will then ask you some questions, upload the shared library on the database server file system, create the user-defined function(s) from it and, depending on your options, execute them. When you are finished using the injected UDFs, sqlmap can also remove them from the database for you. 
+您可以通过编译一个MySQL或PostgreSQL共享库、为Linux / Unix的共享对象提供一个MySQL或PostgreSQL共享库、然后提供sqlmap和在您的机器上本地存储共享库的路径来注入您自己的用户定义函数(udf)。然后sqlmap会问你一些问题，在数据库服务器文件系统上上传共享库，创建用户定义的函数，根据你的选项执行它们。当您使用注入的udf完成后，sqlmap也可以将它们从数据库中删除。
 
-These techniques are detailed in the white paper [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857).
+这些技术在白皮书中很详细 [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857).
 
-Use option `--udf-inject` and follow the instructions.
+使用选项 `--udf-inject` 然后按指示进行。
 
-If you want, you can specify the shared library local file system path via command line too by using `--shared-lib` option. Vice versa sqlmap will ask you for the path at runtime.
+如果需要，可以通过命令行指定共享库本地文件系统路径，也可以使用 `--shared-lib` 选项。反之亦然sqlmap会在运行时向您询问路径。
 
-This feature is available only when the database management system is MySQL or PostgreSQL.
+只有当数据库管理系统是MySQL或PostgreSQL时，此特性才可用。
 
-## File system access
+## 文件系统访问
 
-### Read a file from the database server's file system
+### 从数据库服务器的文件系统中读取文件
 
-Option: `--file-read`
+选项: `--file-read`
 
-It is possible to retrieve the content of files from the underlying file system when the back-end database management system is either MySQL, PostgreSQL or Microsoft SQL Server, and the session user has the needed privileges to abuse database specific functionalities and architectural weaknesses. The file specified can be either a textual or a binary file. sqlmap will handle it properly. 
+当后端数据库管理系统是MySQL、PostgreSQL或Microsoft SQL Server时，从底层文件系统中检索文件的内容是可能的，会话用户有必要的特权来滥用数据库的特定功能和架构弱点。指定的文件可以是文本文件或二进制文件。sqlmap将正确处理它。
 
-These techniques are detailed in the white paper [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857).
+这些技术在白皮书中很详细 [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857).
 
-Example against a Microsoft SQL Server 2005 target to retrieve a binary file:
+针对Microsoft SQL Server 2005目标检索二进制文件的示例:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.129/sqlmap/mssql/iis/get_str2.asp?nam\
@@ -1524,15 +1527,14 @@ output/192.168.136.129/files/C__example.exe: PE32 executable for MS Windows (GUI
 ) Intel 80386 32-bit
 ```
 
-### Upload a file to the database server's file system
+### 将文件上载到数据库服务器的文件系统
+选项: `--file-write` 和 `--file-dest`
 
-Options: `--file-write` and `--file-dest`
+当后端数据库管理系统是MySQL、PostgreSQL或Microsoft SQL server时，可以将本地文件上载到数据库服务器的文件系统中，并且会话用户具有滥用数据库特定功能和架构弱点所需的特权。指定的文件可以是文本文件或二进制文件。sqlmap将正确处理它。
 
-It is possible to upload a local file to the database server's file system when the back-end database management system is either MySQL, PostgreSQL or Microsoft SQL Server, and the session user has the needed privileges to abuse database specific functionalities and architectural weaknesses. The file specified can be either a textual or a binary file. sqlmap will handle it properly. 
+这些技术在白皮书中很详细 [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857).
 
-These techniques are detailed in the white paper [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857).
-
-Example against a MySQL target to upload a binary UPX-compressed file:
+针对MySQL的目标上传一个二进制压缩文件的示例:
 
 ```
 $ file /software/nc.exe.packed 
@@ -1559,21 +1561,21 @@ fully written on the back-end DBMS file system? [Y/n] y
 ytes, same size as the local file '/software/nc.exe.packed'
 ```
 
-## Operating system takeover
+## 操作系统的接管
 
-### Run arbitrary operating system command
+### 运行任意操作系统命令
 
-Option and switch: `--os-cmd` and `--os-shell`
+选项和开关: `--os-cmd` 和 `--os-shell`
 
-It is possible to **run arbitrary commands on the database server's underlying operating system** when the back-end database management system is either MySQL, PostgreSQL or Microsoft SQL Server, and the session user has the needed privileges to abuse database specific functionalities and architectural weaknesses.
+当后端数据库管理系统是MySQL、PostgreSQL或Microsoft SQL server时，可以**在数据库服务器的底层操作系统上运行任意命令**，而会话用户拥有滥用数据库特定功能和架构弱点所需的特权。
 
-On MySQL and PostgreSQL, sqlmap uploads (via the file upload functionality explained above) a shared library (binary file) containing two user-defined functions, `sys_exec()` and `sys_eval()`, then it creates these two functions on the database and calls one of them to execute the specified command, depending on user's choice to display the standard output or not. On Microsoft SQL Server, sqlmap abuses the `xp_cmdshell` stored procedure: if it is disabled (by default on Microsoft SQL Server >= 2005), sqlmap re-enables it; if it does not exist, sqlmap creates it from scratch.
+在MySQL和PostgreSQL中，sqlmap上传(通过上面解释的文件上传功能)共享库(二进制文件)，其中包含两个用户定义函数，`sys_exec()` 和 `sys_eval()`, 然后，它在数据库中创建这两个函数，并调用其中一个函数执行指定的命令，这取决于用户选择显示标准输出。在Microsoft SQL Server上，sqlmap滥用了 `xp_cmdshell`存储过程:如果它是禁用的(默认情况下是在Microsoft SQL Server > = 2005)，sqlmap重新启用它;如果它不存在，sqlmap将从头创建它。
 
-When the user requests the standard output, sqlmap uses one of the enumeration SQL injection techniques (blind, inband or error-based) to retrieve it. Vice versa, if the standard output is not required, stacked query SQL injection technique is used to execute the command.
+当用户请求标准输出时，sqlmap使用一个枚举SQL注入技术(blind, inband or error-based)来检索它。反之亦然，如果不需要标准输出，则使用堆叠查询SQL注入技术来执行命令。
 
-These techniques are detailed in the white paper [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857).
+这些技术在白皮书中很详细[Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857).
 
-Example against a PostgreSQL target:
+针对PostgreSQL目标的示例:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/pgsql/get_int.php?id=1" --\
@@ -1602,35 +1604,32 @@ do you want to remove UDF 'sys_exec'? [Y/n] y
 tem can only be deleted manually
 ```
 
-It is also possible to simulate a real shell where you can type as many arbitrary commands as you wish. The option is `--os-shell` and has the same TAB completion and history functionalities that `--sql-shell` has. 
+还可以模拟一个真正的shell，在这里您可以任意输入任意命令。选项是`--os-shell` ，并具有与 `--sql-shell` 相同的选项卡完成和历史功能。
 
-Where stacked queries has not been identified on the web application (e.g. PHP or ASP with back-end database management system being MySQL) and the DBMS is MySQL, it is still possible to abuse the `SELECT` clause's `INTO OUTFILE` to create a web backdoor in a writable folder within the web server document root and still get command execution assuming the back-end DBMS and the web server are hosted on the same server. sqlmap supports this technique and allows the user to provide a comma-separated list of possible document root sub-folders where try to upload the web file stager and the subsequent web backdoor. Also, sqlmap has its own tested web file stagers and backdoors for the following languages: 
+堆叠查询尚未确定在web应用程序(如PHP、ASP与后端数据库管理系统是MySQL)和DBMS MySQL,仍有可能滥用 `选择` 条款的 `到输出文件`可写文件夹中创建一个web后门在web服务器的文档根目录,仍然得到命令执行假设后端数据库管理系统和web服务器驻留在同一台服务器上。sqlmap支持这种技术，并允许用户提供一个以逗号分隔的可能的文档根子文件夹列表，在其中尝试上传web文件stager和随后的web后门。另外，sqlmap也有自己的测试web文件stager和以下语言的后门:
 
 * ASP
 * ASP.NET
 * JSP
 * PHP
 
-### Out-of-band stateful connection: Meterpreter & friends
+### 带外状态连接:Meterpreter和friends
 
-Switches and options: `--os-pwn`, `--os-smbrelay`, `--os-bof`, `--priv-esc`, `--msf-path` and `--tmp-path`
+开关和选项: `--os-pwn`, `--os-smbrelay`, `--os-bof`, `--priv-esc`, `--msf-path` 和 `--tmp-path`
 
-It is possible to establish an **out-of-band stateful TCP connection between the attacker machine and the database server** underlying operating system when the back-end database management system is either MySQL, PostgreSQL or Microsoft SQL Server, and the session user has the needed privileges to abuse database specific functionalities and architectural weaknesses. This channel can be an interactive command prompt, a Meterpreter session or a graphical user interface (VNC) session as per user's choice. 
+可以建立一个 **带外有状态的攻击者之间的TCP连接机器和数据库服务器** 底层操作系统后端数据库管理系统时MySQL、PostgreSQL或Microsoft SQL server,会话用户所需的特权滥用数据库特定功能和架构的弱点。这个通道可以是交互式命令提示符、Meterpreter会话或图形用户界面(VNC)作为每个用户的选择。
 
-sqlmap relies on Metasploit to create the shellcode and implements four different techniques to execute it on the database server. These techniques are:
+sqlmap依赖于Metasploit来创建shell代码并实现四种不同的技术来在数据库服务器上执行它。这些技术包括:
 
-* Database **in-memory execution of the Metasploit's shellcode** via sqlmap own user-defined function `sys_bineval()`. Supported on MySQL and PostgreSQL - switch `--os-pwn`.
-* Upload and execution of a Metasploit's **stand-alone payload stager** via sqlmap own user-defined function `sys_exec()` on MySQL and PostgreSQL or via `xp_cmdshell()` on Microsoft SQL Server - switch `--os-pwn`.
-* Execution of Metasploit's shellcode by performing a **SMB reflection attack** ([MS08-068](http://www.microsoft.com/technet/security/Bulletin/MS08-068.mspx)) with a UNC path request from the database server to
-the attacker's machine where the Metasploit `smb_relay` server exploit listens. Supported when running sqlmap with high privileges (`uid=0`) on Linux/Unix and the target DBMS runs as Administrator on Windows - switch `--os-smbrelay`.
-* Database in-memory execution of the Metasploit's shellcode by exploiting **Microsoft SQL Server 2000 and 2005
-`sp_replwritetovarbin` stored procedure heap-based buffer overflow** ([MS09-004](http://www.microsoft.com/technet/security/bulletin/ms09-004.mspx)). sqlmap has its own exploit to trigger the
-vulnerability with automatic DEP memory protection bypass, but it relies on Metasploit to generate the shellcode to get executed upon successful exploitation - switch `--os-bof`.
+* 通过sqlmap拥有用户定义的函数 `sys_bineval()`，实现数据库 **Metasploit的shell代码的内存执行** 。支持MySQL和PostgreSQL - 开关 `--os-pwn`.
+* 通过sqlmap自己的用户定义函数`sys_exec()`，上载和执行一个Metasploit的 **s独立有效负载** ，在MySQL和PostgreSQL或通过`xp_cmdshell()`在微软的SQL服务器上 - 开关 `--os-pwn`.
+* 通过执行**SMB反射攻击**来执行Metasploit的shell代码 ([MS08-068](http://www.microsoft.com/technet/security/Bulletin/MS08-068.mspx)) 通过一条从数据库服务器到攻击者的机器的UNC路径请求， 其中 Metasploit `smb_relay` 服务器利用侦听器。 在运行sqlmap时，在Linux / Unix上使用高权限 (`uid=0`) 在Linux / Unix上，目标DBMS在Windows上作为管理员运行 - 开关 `--os-smbrelay`.
+* 通过开发 **Microsoft SQL Server 2000 and 2005`sp_replwritetovarbin` stored procedure heap-based buffer overflow**Metasploit的shell代码的数据库内存执行 ([MS09-004](http://www.microsoft.com/technet/security/bulletin/ms09-004.mspx)). ssqlmap有自己的漏洞来触发
+使用自动DEP内存保护旁路的漏洞，但它依赖于Metasploit来生成被执行的成功的开发 - 开关 `--os-bof`.
 
-These techniques are detailed in the white paper [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857) and in the
-slide deck [Expanding the control over the operating system from the database](http://www.slideshare.net/inquis/expanding-the-control-over-the-operating-system-from-the-database).
+这些技术在白皮书中很详细 [Advanced SQL injection to operating system full control](http://www.slideshare.net/inquis/advanced-sql-injection-to-operating-system-full-control-whitepaper-4633857) 在幻灯片上 [Expanding the control over the operating system from the database](http://www.slideshare.net/inquis/expanding-the-control-over-the-operating-system-from-the-database).
 
-Example against a MySQL target:
+针对MySQL目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.129/sqlmap/mysql/iis/get_int_55.aspx?\
@@ -1739,41 +1738,41 @@ meterpreter > exit
 [*] Meterpreter session 1 closed.  Reason: User exit
 ```
 
-By default MySQL on Windows runs as `SYSTEM`, however PostgreSQL runs as a low-privileged user `postgres` on both Windows and Linux. Microsoft SQL Server 2000 by default runs as `SYSTEM`, whereas Microsoft SQL Server 2005 and 2008 run most of the times as `NETWORK SERVICE` and sometimes as `LOCAL SERVICE`. 
+默认情况下，MySQL作为 `系统`在Windows上运行, 但是PostgreSQL在Windows和Linux上都是低权限用户的 `数据库` 。默认情况下，微软SQL Server 2000作为`SYSTEM`运行，而微软SQL Server 2005和2008运行的大部分时间是 `网络服务` 有时则是 `本地服务`。
 
-It is possible to provide sqlmap with switch `--priv-esc` to perform a **database process' user privilege escalation** via Metasploit's `getsystem` command which include, among others, the [kitrap0d](http://archives.neohapsis.com/archives/fulldisclosure/2010-01/0346.html) technique ([MS10-015](http://www.microsoft.com/technet/security/bulletin/ms10-015.mspx)).
+通过Metasploit的 `getsystem` 命令，包括其他命令，使用`--priv-esc` 开关提供sqlmap来执行**数据库进程的用户权限升级**， [kitrap0d](http://archives.neohapsis.com/archives/fulldisclosure/2010-01/0346.html) 技术 ([MS10-015](http://www.microsoft.com/technet/security/bulletin/ms10-015.mspx)).
 
-## Windows registry access
+## Windows注册表访问
 
-It is possible to access Windows registry when the back-end database management system is either MySQL, PostgreSQL or Microsoft SQL Server, and when the web application supports stacked queries. Also, session user has to have the needed privileges to access it. 
+当后端数据库管理系统是MySQL、PostgreSQL或Microsoft SQL Server时，以及当web应用程序支持堆叠查询时，可以访问Windows注册表。而且，会话用户必须具有访问它的所需权限。
 
-### Read a Windows registry key value
+### 读取Windows注册表的键值
 
-Switch: `--reg-read`
+开关: `--reg-read`
 
-Using this switch you can read registry key values.
+使用这个开关，您可以读取注册表键值。
 
-### Write a Windows registry key value
+### 编写一个Windows注册表的键值
 
-Switch: `--reg-add`
+开关: `--reg-add`
 
-Using this switch you can write registry key values.
+使用这个开关，您可以编写注册表键值。
 
-### Delete a Windows registry key
+### 删除一个Windows注册表键
 
-Switch: `--reg-del`
+开关: `--reg-del`
 
-Using this switch you can delete registry keys.
+使用这个开关你可以删除注册表键。
 
-### Auxiliary registry options
+### 辅助注册选项
 
-Options: `--reg-key`, `--reg-value`, `--reg-data` and `--reg-type`
+选项: `--reg-key`, `--reg-value`, `--reg-data` and `--reg-type`
 
-These options can be used to provide data needed for proper running of switches `--reg-read`, `--reg-add` and  `--reg-del`. So, instead of providing registry key information when asked, you can use them at command prompt as program arguments. 
+这些选项可用于提供正确运行开关 `--reg-read`, `--reg-add` 和  `--reg-del`的数据。因此，当被询问时，您不能提供注册表关键信息，您可以在命令提示符中使用它们作为程序参数。
 
-With `--reg-key` option you specify used Windows registry key path, with `--reg-value` value item name inside provided key, with `--reg-data` value data, while with `--reg-type` option you specify type of the value item.
+使用 `--reg-key` 选项指定使用的Windows注册表键路径，使用 `--reg-value` 的值项目名称在内部提供键，使用 `--reg-data` 值数据，同时，使用 `--reg-type`选项指定值项的类型。
 
-A sample command line for adding a registry key hive follows:
+命令行用于添加注册中心密钥蜂箱的示例:
 
 ```
 $ python sqlmap.py -u http://192.168.136.129/sqlmap/pgsql/get_int.aspx?id=1 --r\

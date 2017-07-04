@@ -5,5 +5,5 @@
 - [Features](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Features.md) - Brief list of supported features
 - [Download and update](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Download-and-update.md) - Keep your copy up-to-date
 - [Dependencies](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Dependencies.md) - Information about used third-party libraries and tools
-- [History](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/History.md) - History from 2006 to 2017
+- [History](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/History.md) - 从2006到2017的历史
 - [Usage](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Usage.md) - Exhaustive breakdown of all options and switches together with examples

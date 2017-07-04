@@ -1,6 +1,6 @@
 # sqlmap_wiki
 
-- [Introduction](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Introduction.md) - Introductory to sqlmap
+- [Introduction](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Introduction.md) - sqlmap导论
 - [Techniques](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Techniques.md) - SQLi techniques supported by sqlmap
 - [Features](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Features.md) - Brief list of supported features
 - [Download and update](https://github.com/CST-traIn/CN-sqlmap-wiki/blob/master/Download-and-update.md) - Keep your copy up-to-date

@@ -71,15 +71,15 @@
 * **1月**,sqlmap subversion开发库从SourceForge移走,并保持一段时间。
 ## 2007
 
-* **November 4**, release **0.5** marks the end of the OWASP Spring of Code 2007 contest participation. Bernardo has [accomplished](http://www.owasp.org/index.php/SpoC_007_-_SQLMap_-_Progress_Page) all the proposed objects which include also initial support for Oracle, enhanced support for UNION query SQL injection and support to test and exploit SQL injections in HTTP Cookie and User-Agent headers.
-* **June 15**, Bernardo releases version **0.4** as a result of the first OWASP Spring of Code 2007 milestone. This release features, amongst others, improvements to the DBMS fingerprint engine, support to calculate the estimated time of arrival, options to enumerate specific data from the database server and brand new logging system.
-* **April**, even though sqlmap was **not** and is **not** an OWASP project, it gets [accepted](http://www.owasp.org/index.php/SpoC_007_-_SqlMap), amongst many other open source projects to OWASP Spring of Code 2007.
-* **March 30**, Bernardo applies to OWASP [Spring of Code 2007](http://www.owasp.org/index.php/OWASP_Spring_Of_Code_2007_Applications#Bernardo_-_sqlmap).
-* **January 20**, sqlmap version **0.3** is released, featuring initial support for Microsoft SQL Server, support to test and exploit UNION query SQL injections and injection points in POST parameters.
+* **11月4日**, 发布**0.5** 标志着2007年代码竞赛参与的owaspspring的结束。贝尔纳多已[完成] (http://www.owasp.org/index.php/SpoC_007_-_SQLMap_-_Progress_Page) 所有提议的对象,包括对Oracle的初始支持、增强对联合查询SQL注入的支持以及支持在httpcookie和用户代理头中测试和利用SQL注入。
+* **6月15日**, 贝尔纳多版本* * 0.4 **作为2007年代码里程碑的第一个owasp版本的结果。这一版本的功能,除其他外,改进了DBMS指纹引擎,支持计算估计的到达时间,从数据库服务器枚举特定数据的选项和全新的日志记录系统。
+* **4月**, 尽管sqlmap是* *不是* *和* *不是* *一个owasp项目,它获得[接受] (http://www.owasp.org/index.php/SpoC_007_-_SqlMap),其中包括2007年代码owaspspring的其他许多开源项目。
+* **3月30日**, 贝尔纳多适用于owasp [ 2007年代码](http://www.owasp.org/index.php/OWASP_Spring_Of_Code_2007_Applications#Bernardo_-_sqlmap).
+* **1月20日**, sqlmap版本* * 0.3 * *发布,主要支持Microsoft SQL server,支持测试和利用union查询SQL注入和post参数中的注入点。
 
 ## 2006
 
-* **December 13**, Bernardo releases version **0.2** with major enhancements to the DBMS fingerprint functionalities and replacement of the old inference algorithm with the bisection algorithm.
-* **September**, Daniele leaves the project, [Bernardo Damele A. G.](http://bernardodamele.blogspot.com) takes it over.
-* **August**, Daniele adds initial support for PostgreSQL and releases version **0.1**.
-* **July 25**, [Daniele Bellucci](http://dbellucci.blogspot.com) registers the sqlmap project on SourceForge and develops it on the [SourceForge subversion repository](http://sqlmap.svn.sourceforge.net/viewvc/sqlmap/). The skeleton is implemented and limited support for MySQL added.
+* **12月13日**,贝尔纳多版本版本* * 0.2 **对DBMS指纹功能作了重大改进,并使用二分法替换旧的推断算法。
+* **9月**, 丹尼尔离开了这个项目, [Bernardo Damele A. G.](http://bernardodamele.blogspot.com) 接手.
+* **8月**, 达尼埃莱增加了PostgreSQL和发布版本* * 0.1 **的初始支持。
+* **7月25日**, [Daniele Bellucci](http://dbellucci.blogspot.com) 在SourceForge上注册sqlmap项目,并在](http://sqlmap.svn.sourceforge.net/viewvc/sqlmap/). MySQL添加了框架,并对MySQL添加了有限的支持。

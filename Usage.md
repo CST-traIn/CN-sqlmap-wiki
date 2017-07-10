@@ -1895,35 +1895,34 @@ banner:    'Oracle Database 10g Enterprise Edition Release 10.2.0.1.0 - Prod'
 
 As you can see, sqlmap first calculates the length of the query output, then estimates the time of arrival, shows the progress in percentage and counts the number of retrieved output characters. 
 
-### Flush session files
+### 清理会话文件
 
-Option: `--flush-session`
+选项: `--flush-session`
 
-As you are already familiar with the concept of a session file from the description above, it is good to know that you can flush the content of that file using option `--flush-session`. This way you can avoid the caching mechanisms implemented by default in sqlmap. Other possible way is to manually remove the session file(s). 
+因为您已经熟悉了上面描述的会话文件的概念, 您知道可以使用选项`--flush-session`来刷新该文件的内容将会非常有用. 通过这种方式，您可以避免在sqlmap中默认实现的缓存机制. 另一种可能的方法是手动删除会话文件. 
 
-### Parse and test forms' input fields
+### 解析和测试表单的输入字段
 
-Switch: `--forms`
+开关: `--forms`
 
-Say that you want to test against SQL injections a huge _search form_ or you want to test a login bypass (typically only two input fields named like _username_ and _password_), you can either pass to sqlmap the request in a request file (`-r`), set the POSTed data accordingly (`--data`) or let sqlmap do it for you! 
+假设您想要对SQL注入进行测试，这是一个巨大的搜索表单，或者您想要测试一个登录通道(通常只有两个输入字段，如用户名和密码), 您可以在请求文件(`-r`)中传递请求，并相应地设置发布的数据(`--data`)，或者让sqlmap为您完成! 
 
-Both of the above mentioned instances, and many others, appear as ` <form>` and ` <input>` tags in HTML response bodies and this is where this switch comes into play.
+上面提到的两个例子，以及很多其他的，都是在HTML响应体中出现的标签，例如<form>`和` <input>`，这就是这个开关发挥作用的地方.
 
-Provide sqlmap with `--forms` as well as the page where the form can be found as the target URL (`-u`) and sqlmap will request the target URL for you, parse the forms it has and guide you through to test for SQL injection on those form input fields (parameters) rather than the target URL provided. 
+向sqlmap提供`--forms`以及可以找到表单的页面作为目标URL`--forms`，sqlmap将为您请求目标URL, 解析它所拥有的表单，并引导您完成对这些表单输入字段(参数)的SQL注入测试，而不是提供的目标URL. 
 
-### Ignore query results stored in session file
+### 忽略会话文件中的存储查询结果
 
-Switch: `--fresh-queries`
+开关: `--fresh-queries`
 
-As you are already familiar with the concept of a session file from the description above, it is good to know that you can ignore the content of that file using option `--fresh-queries`. This way you can keep the session file untouched and for a selected run, avoid the resuming/restoring of queries output. 
+因为您已经熟悉了上面描述的会话文件的概念, 您知道可以使用选项`--fresh-queries`忽略该文件的内容将会非常有用. 通过这种方式，您可以保持会话文件不受影响，并且对于所选择运行的部分，避免查询输出的恢复. 
 
-### Use DBMS hex function(s) for data retrieval
+### 使用DBMS十六进制函数进行数据检索
+开关: `--hex`
 
-Switch: `--hex`
+在丢失非ascii数据的情况下，需要特殊的必需品. 解决这个问题的一个解决方案是使用DBMS十六进制函数.打开这个开关,数据将被编辑为在检索之前和之后未编码的原始形式的十六进制形式.
 
-In lost of cases retrieval of non-ASCII data requires special needs. One solution for that problem is usage of DBMS hex function(s). Turned on by this switch, data is encoded to it's hexadecimal form before being retrieved and afterwards unencoded to it's original form.
-
-Example against a PostgreSQL target:
+针对PostgreSQL目标的示例:
 
 ```
 $ python sqlmap.py -u "http://192.168.48.130/sqlmap/pgsql/get_int.php?id=1" --b\
@@ -1946,21 +1945,21 @@ GCC gcc-4.3.real (Debian 4.3.2-1.1) 4.3.2
 [...]
 ```
 
-### Custom output directory path
+### 自定义输出目录路径
 
-Option: `--output-dir`
+选项: `--output-dir`
 
-sqlmap by default stores session and result files inside a subdirectory `output`. In case you want to use a different location, you can use this option (e.g. `--output-dir=/tmp`).
+默认情况下，sqlmap会在子目录`output`中（输出）存储会话和结果文件. 如果你想使用一个不同的位置，你可以使用这个选项(例如`--output-dir=/tmp`).
 
-### Parse DBMS error messages from response pages
+### 解析来自响应页面的DBMS错误消息
 
-Switch: `--parse-errors`
+开关: `--parse-errors`
 
-If the web application is configured in debug mode so that it displays in the HTTP responses the back-end database management system error messages, sqlmap can parse and display them for you.
+如果web应用程序是在调试模式下配置的，以便在HTTP响应中显示后端数据库管理系统错误消息，sqlmap可以解析并显示它们.
 
-This is useful for debugging purposes like understanding why a certain enumeration or takeover switch does not work - it might be a matter of session user's privileges and in this case you would see a DBMS error message along the lines of `Access denied for user  <SESSION USER>`. 
+这对于调试目的很有用，比如理解为什么某个枚举或接管开关不起作用- 这可能是会话用户权限的问题，在这种情况中，您将看到一个DBMS错误消息`Access denied for user  <SESSION USER>`. 
 
-Example against a Microsoft SQL Server target:
+针对Microsoft SQL Server目标的示例:
 
 ```
 $ python sqlmap.py -u "http://192.168.21.129/sqlmap/mssql/iis/get_int.asp?id=1"\
@@ -1988,71 +1987,71 @@ ers (0x80040E14)
 [...]
 ```
 
-### Save options in a configuration INI file
+### 在配置INI文件中保存选项
 
-Option: `--save`
+选项: `--save`
 
-It is possible to save the command line options to a configuration INI file. The generated file can then be edited and passed to sqlmap with the `-c` option as explained above.
+将命令行选项保存到配置INI文件中是可行的. 然后可以对生成的文件进行编辑，并使用 `-c` 选项将其传递给sqlmap.
 
-### Update sqlmap
+### 更新sqlmap
 
-Switch: `--update`
+开关: `--update`
 
-Using this option you can update the tool to the latest development version directly from the [Git repository](https://github.com/sqlmapproject/sqlmap.git). You obviously need Internet access. 
+使用这个选项，您可以直接将工具更新到最新的开发版本[Git repository](https://github.com/sqlmapproject/sqlmap.git). 显然，你需要互联网接入. 
 
-If, for any reason, this operation fails, run `git pull` from your sqlmap working copy. It will perform the exact same operation of switch `--update`. If you are running sqlmap on Windows, you can use the [SmartGit](http://www.syntevo.com/smartgit/index.html) client. 
+如果由于任何原因，该操作失败，那么从您的sqlmap工作副本中运行`git pull`. 它会执行完全相同的开关操作`--update`. 如果在Windows上运行sqlmap，则可以使用[SmartGit]客户端(http://www.syntevo.com/smartgit/index.html). 
 
-This is strongly recommended **before** reporting any bug to the [mailing lists](http://www.sqlmap.org/#ml).
+强烈建议，向[mailing lists]提前报告任意bug(http://www.sqlmap.org/#ml).
 
-## Miscellaneous
+## 杂项
 
-### Use short mnemonics
+### 使用短助记符
 
-Option: `-z`
+选项: `-z`
 
-It could become tedious to type all desired options and switches, especially for those that are used most often (e.g. `--batch --random-agent --ignore-proxy --technique=BEU`). There is a simpler and much shorter way how to deal with that problem. In sqlmap it's called "mnemonics".
+输入所有想要的选项和开关会变得很乏味, 尤其是对那些需要经常使用的(例如`--batch --random-agent --ignore-proxy --technique=BEU`). 有一个更简单，更方便的方法来解决这个问题. 在sqlmap中，它被称为“助记术”.
 
-Each option and switch can be written in a shorter mnemonic form using option `-z`, separated with a comma character (`,`), where mnemonics represent only the first arbitrarily chosen part of the original name. There is no strict mapping of options and switches to their respective shortened counterparts. Only required condition is that there is no other option nor switch that has a same prefix as the desired one.
+每个选项和开关都可以用一个较短的助记形式`-z`书写, 用逗号分隔(`,`), 记忆术仅仅代表了最初名字的第一个任意选择的部分. 没有严格的切换到相应的选项和缩写的对应关系. 唯一需要的条件是没有其他选项和开关与它们的前缀一样.
 
-Example:
+实例:
 
 ```
 $ python sqlmap.py --batch --random-agent --ignore-proxy --technique=BEU -u "ww\
 w.target.com/vuln.php?id=1"
 ```
 
-can be written (one of many ways) in shorter mnemonic form like:
+可以用更短的记忆形式(多种方式之一)写成:
 
 ```
 $ python sqlmap.py -z "bat,randoma,ign,tec=BEU" -u "www.target.com/vuln.php?id=\
 1"
 ```
 
-Another example:
+又一实例:
 
 ```
 $ python sqlmap.py --ignore-proxy --flush-session --technique=U --dump -D testd\
 b -T users -u "www.target.com/vuln.php?id=1"
 ```
 
-can be written in shorter mnemonic form like:
+可以用更短的记忆形式写成:
 
 ```
 $ python sqlmap.py -z "ign,flu,bat,tec=U,dump,D=testdb,T=users" -u "www.target.\
 com/vuln.php?id=1"
 ```
 
-### Alerting on successful SQL injection detection
+###对成功的SQL注入检测的警告
 
-Option: `--alert`
+选项: `--alert`
 
-### Set answers for questions
+### 回答问题
 
-Option: `--answers`
+选项: `--answers`
 
-In case that user wants to automatically set up answers for questions, even if `--batch` is used, using this option he can do it by providing any part of question together with answer after an equal sign. Also, answers for different question can be split with delimiter character `,`.
+如果用户想要自动设置问题的答案,即使使用`--batch`进行批处理, 使用这个选项，他可以通过在等号后面给出问题的任何部分和答案来达到目的. 同时,不同问题的答案可以用分隔符`,`分隔开.
 
-Example against a MySQL target:
+针对MySQL目标的示例:
 
 ```
 $ python sqlmap.py -u "http://192.168.22.128/sqlmap/mysql/get_int.php?id=1"--te\
@@ -2066,23 +2065,23 @@ d level (1) and risk (1)? [Y/n] N
 [...]
 ```
 
-### Make a beep sound when SQL injection is found
+### 在发现SQL注入时发出蜂鸣声
 
-Switch: `--beep`
+开关: `--beep`
 
-In case that user uses switch `--beep` he'll be warned with a beep sound immediately when SQL injection is found. This is especially useful when there is a large bulk list (option `-m`) of target URLs to be tested.
+如果用户使用开关`--beep`，当SQL注入被发现时，他会立即收到警告.当需要测试目标url的大量列表(option `-m`)时，这一点特别有用.
 
-### Cleanup the DBMS from sqlmap specific UDF(s) and table(s)
+### 从sqlmap特定的UDF(s)和表(s)中清除DBMS
 
-Switch: `--cleanup`
+开关: `--cleanup`
 
-It is recommended to clean up the back-end database management system from sqlmap temporary table(s) and created user-defined function(s) when you are done taking over the underlying operating system or file system. Switch `--cleanup` will attempt to clean up the DBMS and the file system wherever possible. 
+建议从sqlmap临时表中清理后端数据库管理系统，并在接管底层操作系统或文件系统时创建用户定义的函数.开关`--cleanup`将尝试尽可能地清理DBMS和文件系统. 
 
-### Check for dependencies
+### 检查依赖关系
 
-Switch: `--dependencies`
+开关: `--dependencies`
 
-sqlmap in some special cases requires independent installation of extra 3rd party libraries (e.g. options `-d`, switch `--os-pwn` in case of `icmpsh` tunneling, option `--auth-type` in case of `NTLM` HTTP authentication type, etc.) and it will warn the user only in such special cases. But, if you want to independently check for all those extra 3rd party library dependencies you can use switch `--dependencies`.
+在某些特殊情况下，sqlmap需要独立安装额外的第三方库(例如在`icmpsh` 隧道中的开关`-d`,开关`--os-pwn`,在`NTLM` HTTP身份验证类型中的开关`--auth-type等等) 并且它只会在这种特殊情况下警告用户. 但是, 如果你想独立检查所有额外的第三方库依赖项你可以使用开关`--dependencies`.
 
 ```
 $ python sqlmap.py --dependencies
@@ -2122,31 +2121,31 @@ ou plan to attack a web application using WebSocket. Download from https://pypi.
 python.org/pypi/websocket-client/
 ```
 
-### Disable console output coloring
+### 禁用控制台输出颜色
 
-Switch: `--disable-coloring`
+开关: `--disable-coloring`
 
-sqlmap by default uses coloring while writting to console. In case of undesired effects (e.g. console appearance of uninterpreted ANSI coloring codes like `\x01\x1b[0;32m\x02[INFO]`) you can disable console output coloring by using this switch.
+默认情况下，sqlmap在写入控制台时使用着色. 如果没有达到预期效果 (例如未解释的ANSI着色代码如`\x01\x1b[0;32m\x02[INFO]`的控制台外观)通过使用这个开关，可以禁用控制台输出颜色.
 
-### Use Google dork results from specified page number
+### 使用来自指定页面的Google dork结果
 
-Option: `--gpage`
+开关: `--gpage`
 
-Default sqlmap behavior with option `-g` is to do a Google search and use the first 100 resulting URLs for further SQL injection testing. However, in combination with this option you can specify with this option (`--gpage`) a page other than the first one to retrieve target URLs from. 
+使用选项'-g'的默认sqlmap行为是进行Google搜索并使用前100个结果url进行进一步的SQL注入测试.但是, 结合这个选项，您可以使用这个选项(`--gpage`)指定一个页面，而不是第一个从这个选项中检索目标. 
 
-### Use HTTP parameter pollution
+### 使用HTTP参数污染
 
-Switch: `--hpp`
+开关: `--hpp`
 
-HTTP parameter pollution (HPP) is a method for bypassing WAF/IPS/IDS protection mechanisms (explained [here](http://www.imperva.com/resources/glossary/http_parameter_pollution_hpp.html)) that is particularly effective against ASP/IIS and ASP.NET/IIS platforms. If you suspect that the target is behind such protection, you can try to bypass it by using this switch.
+HTTP参数污染(HPP) 是一种绕过ip/ip/ids保护机制的方法(解释在此[here](http://www.imperva.com/resources/glossary/http_parameter_pollution_hpp.html)) 这对asp/iis和ASP以及ASP.NET/IIS平台特别有效. 如果你怀疑目标是这样的保护，你可以通过使用这个开关来绕过它.
 
-### Make a through testing for a WAF/IPS/IDS protection
+### 对一个ip/ip/ids保护进行测试
 
-Switch: `--identify-waf`
+开关: `--identify-waf`
 
-sqlmap can try to identify backend WAF/IPS/IDS protection (if any) so user could do appropriate steps (e.g. use tamper scripts with `--tamper`). Currently around 30 different products are supported (Airlock, Barracuda WAF, etc.) and their respective WAF scripts can be found inside `waf` directory.
+sqlmap可以尝试识别后端ip/ip/ids保护(如果有的话)，这样用户就可以执行适当的步骤(例如使用篡改脚本`--tamper`). 目前大约有30种不同的产品被支持(Airlock、Barracuda WAF等)，它们各自的WAF脚本可以在WAF目录中找到。.
 
-Example against a MySQL target protected by the ModSecurity WAF:
+针对由ModSecurity WAF保护的MySQL目标的例子:
 
 ```
 $ python sqlmap.py -u "http://192.168.21.128/sqlmap/mysql/get_int.php?id=1" --i\
@@ -2197,19 +2196,19 @@ cation Firewall (Trustwave)'. Please consider usage of tamper scripts (option '-
 [...]
 ```
 
-Skip heuristic detection of WAF/IPS/IDS protection
+跳过启发式检测的ip/ip/ids保护
 
-Switch: `--skip-waf`
+开关: `--skip-waf`
 
-By default, sqlmap automatically sends inside one of starting requests a dummy parameter value containing a deliberately "suspicious" SQL injection payload (e.g. `...&foobar=AND 1=1 UNION ALL SELECT 1,2,3,table_name FROM information_schema.tables WHERE 2>1`). If target responds differently than for the original request, there is a high possibility that it's under some kind of protection. In case of any problems, user can disable this mechanism by providing switch `--skip-waf`.
+默认情况下，sqlmap会自动发送一个初始请求的虚拟参数值，其中包含一个故意“可疑”的SQL注入有效负载 (例如`...&foobar=AND 1=1 UNION ALL SELECT 1,2,3,table_name FROM information_schema.tables WHERE 2>1`). 如果目标的响应与原始请求的不同，那么很有可能它处于某种保护之下. 如果出现任何问题，用户可以通过使用`--skip-waf`来禁用该机制.
 
-### Imitate smartphone
+### 模仿智能手机
 
-Switch: `--mobile`
+开关: `--mobile`
 
-Sometimes web servers expose different interfaces toward mobile phones than to desktop computers. In such cases you can enforce usage of one of predetermined smartphone HTTP User-Agent header values. By using this switch, sqlmap will ask you to pick one of popular smartphones which it will imitate in current run.
+有时，web服务器会向移动电话显示不同的接口，而不是桌面计算机. 在这种情况下，您可以强制使用一种预先确定的智能手机HTTP用户代理头值.通过使用这个开关，sqlmap会让你选择一款流行的智能手机，它会在当前的运行中模仿.
 
-Example run:
+运行实例:
 
 ```
 $ python sqlmap.py -u "http://www.target.com/vuln.php?id=1" --mobile
@@ -2226,19 +2225,19 @@ which smartphone do you want sqlmap to imitate through HTTP User-Agent header?
 [...]
 ```
 
-### Work in offline mode (only use session data)
+### 脱机模式下的工作(只使用会话数据)
 
-Switch: `--offline`
+开关: `--offline`
 
-By using switch `--offline` sqlmap will use only previous session data in data enumeration. This basically means that there will be zero connection attempts during such run.
+通过使用开关`--offline`sqlmap将仅使用数据枚举中的前一个会话数据. 这基本上意味着在运行期间将会有零连接尝试.
 
-### Safely remove all content from output directory
+### 安全地从输出目录中删除所有内容
 
-Switch `--purge-output`
+开关`--purge-output`
 
-In case that user decides to safely remove all content from `output` directory, containing all target details from previous sqlmap runs, he can use switch `--purge-output`. While purging, all files from (sub)directories in folder `output` will be overwritten with random data, truncated, renamed to random names, (sub)directories will be renamed to random names too, and finally the whole directory tree will be deleted.
+如果用户决定安全地从`output` 目录中删除所有内容，包含以前的sqlmap运行的所有目标细节，那么他可以使用开关-输出-输出`--purge-output`。在清除时，文件夹`output`中的所有文件(子)目录中的所有文件都将被用随机数据覆盖，被截断，重命名为随机名称，(子)目录也将被重命名为随机名称，最后整个目录树将被删除.
 
-Example run:
+运行实例:
 
 ```
 $ python sqlmap.py --purge-output -v 3
@@ -2253,13 +2252,13 @@ $ python sqlmap.py --purge-output -v 3
 [...]
 ```
 
-### Conduct through tests only if positive heuristic(s)
+### 仅在积极启发式情况下进行测试
 
-Switch `--smart`
+开关 `--smart`
 
-There are cases when user has a large list of potential target URLs (e.g. provided with option `-m`) and he wants to find a vulnerable target as fast as possible. If switch `--smart` is used, only parameters with which DBMS error(s) can be provoked, are being used further in scans. Otherwise they are skipped.
+有些情况下，用户有大量潜在的目标url(例如，提供选项`-m`)，他希望尽快找到一个易受攻击的目标。如果开关`--smart`被使用，只会部分参数被激发，在扫描中会被进一步使用，否则他们跳过.
 
-Example against a MySQL target:
+针对MySQL目标的示例:
 
 ```
 $ python sqlmap.py -u "http://192.168.21.128/sqlmap/mysql/get_int.php?ca=17&use\
@@ -2311,13 +2310,13 @@ mns' injectable
 [...]
 ```
 
-### Select (or skip) tests by payloads and/or titles
+### 通过负载和/或标题选择(或跳过)测试
 
-Option `--test-filter`
+开关 `--test-filter`
 
-In case that you want to filter tests by their payloads and/or titles you can use this option. For example, if you want to test all payloads which have `ROW` keyword inside, you can use `--test-filter=ROW`.
+如果你想要通过他们的有效载荷和/或标题来过滤测试你可以使用这个选项. 例如,如果你想测试所有有`ROW`关键字的有效负载，你可以使用`--test-filter=ROW`.
 
-Example against a MySQL target:
+针对MySQL目标的示例:
 
 ```
 $ python sqlmap.py -u "http://192.168.21.128/sqlmap/mysql/get_int.php?id=1" --b\
@@ -2351,15 +2350,15 @@ x)
 [...]
 ```
 
-Option `--test-skip=TEST`
+选项 `--test-skip=TEST`
 
-In case that you want to skip tests by their payloads and/or titles you can use this option. For example, if you want to skip all payloads which have `BENCHMARK` keyword inside, you can use `--test-skip=BENCHMARK`.
+如果你想通过它们的有效载荷和/或标题跳过测试你可以使用这个选项. 例如,如果你想跳过所有有`BENCHMARK`关键字的有效载荷，你可以使用`--test-skip=BENCHMARK`.
 
-### Interactive sqlmap shell
+### 交互式sqlmap壳
 
-Switch: `--sqlmap-shell`
+开关: `--sqlmap-shell`
 
-By using switch `--sqlmap-shell` user will be presented with the interactive sqlmap shell which has the history of all previous runs with used options and/or switches:
+通过使用开关`--sqlmap-shell` 用户将被呈现交互式sqlmap shell，该shell具有使用过的选项和/或开关的所有以前运行的历史:
 
 ```
 $ python sqlmap.py --sqlmap-shell
@@ -2500,13 +2499,13 @@ p/output/testphp.vulnweb.com'
 sqlmap-shell> exit
 ```
 
-### Simple wizard interface for beginner users
+### 为初学者用户提供简单的向导界面
 
-Switch: `--wizard`
+开关: `--wizard`
 
-For beginner users there is a wizard interface which uses a simple workflow with as little questions as possible. If user just enters target URL and uses default answers (e.g. by pressing `Enter`) he should have a properly set sqlmap run environment by the end of the workflow.
+对于初学者来说，有一个向导界面，它使用一个简单的工作流以及尽可能少的问题. 如果用户只是输入目标URL并使用默认的答案(例如通过按`Enter`) 在工作流程的最后，他应该有一个适当设置的sqlmap运行环境.
 
-Example against a Microsoft SQL Server target:
+针对Microsoft SQL Server目标的示例:
 
 ```
 $ python sqlmap.py --wizard
@@ -2598,7 +2597,7 @@ current user is DBA:    True
 
 ## API (REST-JSON)
 
-sqlmap can be run through the REST-JSON API, API (abbr. for Application Program Interface) that uses JSON for REST (abbr. for REpresentational State Transfer) communication between server and client instance(s). In plainspeak, server runs the sqlmap scan(s), while clients are setting the sqlmap options/switches and pull the results back. Main program file for running the API is `sqlmapapi.py`, while the client can also be implemented inside the arbitrary user program.
+sqlmap可以通过REST-JSON API(用于应用程序接口的API)来运行，该API用于REST(用于表示状态传输)之间的通信，服务器和客户端实例之间的通信。简单地说，服务器运行sqlmap扫描，而客户端正在设置sqlmap选项/交换机，并将结果拉回来。运行该API的主要程序文件是`sqlmapapi.py`，客户端也可以在任意的用户程序中实现.
 
 ```
 $ python sqlmapapi.py -hh
@@ -2613,23 +2612,23 @@ Options:
   --adapter=ADAPTER     Server (bottle) adapter to use (default "wsgiref")
 ```
 
-Server runs the `sqlmapapi.py` by using switch `-s`, client by using switch `-c`, while in both cases user can (optionally) set listening IP address with option `-H` (default `"127.0.0.1"`) and listening port with option `-p` (default `8775`). Each client's "session" can have multiple "tasks" (i.e. sqlmap scan runs), where user can arbitrary choose which task should be currently active.
+服务器通过使用开关 `-s`运行`sqlmapapi.py`，客户端使用开关`-c`，在这两种情况下，用户都可以(可选地)设置选项`-H`(默认为`"127.0.0.1"`)的监听IP地址和选择`-p`(默认`8775`)的监听端口。每个客户的“会话”都可以有多个“任务”(例如，sqlmap扫描运行)，用户可以任意选择当前活动的任务.
 
-Inside the client's command line interface available commands are:
+在客户端命令行界面中，可用的命令是:
 
-* `help` - showing list of available commands along with basic help information
-* `new ARGS` - starts a new scan task with provided arguments (e.g. `new -u "http://testphp.vulnweb.com/artists.php?artist=1"`)
-* `use TASKID` - switches current context to different task (e.g. `use c04d8c5c7582efb4`)
-* `data` - retrieves and shows data for current task
-* `log`- retrieves and shows log for current task
-* `status` - retrieves and shows status for current task
-* `stop` - stops current task
-* `kill` - kills current task
-* `list` - displays all tasks (for current session)
-* `flush` - flushes (i.e. deletes) all tasks
-* `exit` - exits the client interface
+* `help` - 显示可用命令的列表以及基本的帮助信息
+* `new ARGS` - 使用提供的参数启动一个新的扫描任务 (例如`new -u "http://testphp.vulnweb.com/artists.php?artist=1"`)
+* `use TASKID` - 将当前上下文切换到不同的任务(例如`use c04d8c5c7582efb4`)
+* `data` - 检索和显示当前任务的数据
+* `log`- 检索和显示当前任务的日志
+* `status` - 检索并显示当前任务的状态
+* `stop` - 停止当前任务
+* `kill` - 终结当前任务
+* `list` - 显示所有任务(当前会话)
+* `flush` -清理(即删除)所有任务
+* `exit` - 退出客户端接口
 
-Example server run:
+服务器运行示例:
 
 ```
 $ python sqlmapapi.py -s -H "0.0.0.0"
@@ -2646,7 +2645,7 @@ $ python sqlmapapi.py -s -H "0.0.0.0"
 [12:48:59] [DEBUG] [a42ddaef02e976f0] Retrieved scan data and error messages
 ```
 
-Example client run:
+客户机运行示例:
 
 ```
 $ python sqlmapapi.py -c -H "192.168.110.1"

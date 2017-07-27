@@ -120,7 +120,7 @@ Options:
     --second-order=S..  Resulting page URL searched for second-order response
 
   Fingerprint:
-    -f, --fingerprint   Perform an extensive DBMS version fingerprint
+    -f, --fingerprint   执行一个广泛的 DBMS 版本的 fingerprint
 
   Enumeration:
     These options can be used to enumerate the back-end database
@@ -1020,15 +1020,15 @@ You can manually tell sqlmap to test for this type of SQL injection by using opt
 
 ## Fingerprint
 
-### Extensive database management system fingerprint
+### 广泛的数据库管理系统 fingerprint
 
 Switches: `-f` or `--fingerprint`
 
-By default the web application's back-end database management system fingerprint is handled automatically by sqlmap. Just after the detection phase finishes and the user is eventually prompted with a choice of which vulnerable parameter to use further on, sqlmap fingerprints the back-end database management system and continues on with the injection by knowing which SQL syntax, dialect and queries to use to proceed with the attack within the limits of the database architecture. 
+通过拖欠网络应用层的后端数据库管理系统fingerprint被sqlmap自动处理。就在检测阶段结束以后并且用户最终被提示以再进一步选择使用哪一个易受攻击的参数, sqlmap fingerprints 这个后端数据库管理系统并且继续通过了解使用哪一个SQL语法，特殊语言和查询这一注入来继续在数据库架构的范围之内进行攻击。
 
-If for any instance you want to perform an extensive database management system fingerprint based on various techniques like specific SQL dialects and inband error messages, you can provide the switch `--fingerprint`. sqlmap will perform a lot more requests and fingerprint the exact DBMS version and, where possible, operating system, architecture and patch level. 
+如果在任何情况下你想要执行一个广泛的基于各种技术例如特定的SQL语言和inband错误的信息的数据库管理系统fingerprint, 你可以 provide the switch `--fingerprint`. sqlmap 将会执行更多的请求并且 fingerprint 准确的 DBMS 版本并且在可能的情况下操作系统，结构和插线等级。 
 
-If you want the fingerprint to be even more accurate result, you can also provide the switch `-b` or `--banner`. 
+如果你想要 fingerprint 得到更加精准的结果, 你也可以 provide the switch `-b` or `--banner`. 
 
 ## 枚举
 

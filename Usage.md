@@ -288,54 +288,53 @@ $ python sqlmap.py -d "mysql://admin:admin@192.168.21.17:3306/testdb" -f --bann\
 er --dbs --users
 ```
 
-### Target URL
+### 目标URL
 
-Option: `-u` or `--url`
+Option: `-u`或者`--url`
 
-Run sqlmap against a single target URL. This option requires a target URL in following form: 
+对单个目标URL运行sqlmap。这个操作需要以下形式的URL：
 
 `http(s)://targeturl[:port]/[...]`
 
-For example:
+例如：
 
 ```
 $ python sqlmap.py -u "http://www.target.com/vuln.php?id=1" -f --banner --dbs -\
 -users
 ```
 
-### Parse targets from Burp or WebScarab proxy logs
+### 通过Burp或者WebScarab代理登录解析目标
 
 Option: `-l`
 
-Rather than providing a single target URL, it is possible to test and inject against HTTP requests proxied through [Burp proxy](http://portswigger.net/suite/) or 
-[WebScarab proxy](http://www.owasp.org/index.php/Category:OWASP_WebScarab_Project). This option requires an argument which is the proxy's HTTP requests log file.
+不提供单个目标URL，可以通过[Burp代理](http://portswigger.net/suite/)或者
+[WebScarab代理](http://www.owasp.org/index.php/Category:OWASP_WebScarab_Project)测试和注入HTTP请求。这个操作需要代理的HTTP请求登录文件作为参数。
 
-### Parse targets from remote sitemap(.xml) file
+### 通过远程sitemap(.xml)文件解析目标
 
 Option: `-x`
 
-A sitemap is a file where web admins can list the web page locations of their site to tell search engines about the site content's organization. You can provide a sitemap's location to sqlmap by using option `-x` (e.g. `-x http://www.target.com/sitemap.xml`) so it could find usable target URLs for scanning purposes.
+sitemap是一个文件，web管理员可以列出网站的网页位置，以告诉搜索引擎网站内容的组织形式。你可以使用`-x`来告诉sqlmap sitemap文件的位置（例如 `-x http://www.target.com/sitemap.xml`）
 
-### Scan multiple targets enlisted in a given textual file
+### 扫描给定文本文件中的大量目标
 
 Option: `-m`
 
-Providing list of target URLs enlisted in a given bulk file, sqlmap will scan 
-each of those one by one.
+对给定批文件中的目标URL，sqlmap可以对其进行逐个扫描。
 
-Sample content of a bulk file provided as an argument to this option:
+使用示例的批文件内容作为这个操作的参数：
 
     www.target1.com/vuln1.php?q=foobar
     www.target2.com/vuln2.asp?id=1
     www.target3.com/vuln3/id/1*
 
-### Load HTTP request from a file
+### 从文件中加载HTTP请求
 
 Option: `-r`
 
-One of the possibilities of sqlmap is loading of raw HTTP request from a textual file. That way you can skip usage of a number of other options (e.g. setting of cookies, POSTed data, etc).
+sqlmap可以从文本文件中加载原始的HTTP请求。这样，您可以跳过其他一些操作（例如设置Cookie，POSTed数据等）。
 
-Sample content of a HTTP request file provided as an argument to this option:
+使用示例的HTTP请求文件内容作为这个操作的参数：
 
     POST /vuln.php HTTP/1.1
     Host: www.target.com
@@ -343,47 +342,47 @@ Sample content of a HTTP request file provided as an argument to this option:
     
     id=1
 
-Note that if the request is over HTTPS, you can use this in conjunction with switch `--force-ssl` to force SSL connection to 443/tcp. Alternatively, you can append `:443` to the end of the `Host` header value.
+请注意，如果请求是通过HTTPS，您可以结合使用`--force-ssl`来强制SSL连接到443/tcp。 或者，您可以将`：443`附加到`Host`头值的末尾。
 
-### Process Google dork results as target addresses
+### 将Google搜索到的URL作为目标处理
 
 Option: `-g`
 
-It is also possible to test and inject on GET parameters based on results of your Google dork.
+可以基于Google搜索的结果测试并注入GET参数。
 
-This option makes sqlmap negotiate with the search engine its session cookie to be able to perform a search, then sqlmap will retrieve Google first 100 results for the Google dork expression with GET parameters asking you if you want to test and inject on each possible affected URL.
+这个操作使sqlmap与搜索引擎协商使其执行搜索的会话cookie，然后sqlmap会复现Google搜索的前100个结果，通过GET参数询问你是否想要测试并注入每个可能受影响的URL。
 
-For example:
+例如：
 
 ```
 $ python sqlmap.py -g "inurl:\".php?id=1\""
 ```
 
-### Load options from a configuration INI file
+### 从配置文件INI中加载操作
 
 Option: `-c`
 
-It is possible to pass user's options from a configuration INI file, an example is `sqlmap.conf`.
+可以在配置文件INI中传递用户的操作，比如`sqlmap.conf`。
 
-Note that if you provide other options from command line, those are evaluated when running sqlmap and overwrite those provided in the configuration file.
+注意，如果你从命令行提供操作，当运行sqlmap时，这些操作将被评估并覆盖配置文件中的操作。
 
-## Request
+## 请求
 
-These options can be used to specify how to connect to the target URL.
+这些操作用来详细解释如何与目标URL连接。
 
-### HTTP method
+### HTTP方法
 
 Option: `--method`
 
 sqlmap automatically detects the proper HTTP method to be used in HTTP requests. Nevertheless, in some cases, it is required to force the usage of specific HTTP method (e.g. `PUT`) that is not used by automatism. This is possible with usage of this option (e.g. `--method=PUT`).
 
-### HTTP data
+### HTTP数据
 
 Option: `--data`
 
 By default the HTTP method used to perform HTTP requests is GET, but you can implicitly change it to POST by providing the data to be sent in the POST requests. Such data, being those parameters, are tested for SQL injection as well as any provided GET parameters.
 
-For example:
+例如：
 
 ```
 $ python sqlmap.py -u "http://www.target.com/vuln.php" --data="id=1" -f --banne\
@@ -396,14 +395,14 @@ Option: `--param-del`
 
 There are cases when default parameter delimiter (e.g. `&` in GET and POST data) needs to be overwritten for sqlmap to be able to properly split and process each parameter separately.
 
-For example:
+例如：
 
 ```
 $ python sqlmap.py -u "http://www.target.com/vuln.php" --data="query=foobar;id=\
 1" --param-del=";" -f --banner --dbs --users
 ```
 
-### HTTP `Cookie` header
+### HTTP `Cookie`头
 
 Options and switch: `--cookie`, `--cookie-del`, `--load-cookies` and `--drop-set-cookie`
 
@@ -429,7 +428,7 @@ There is also an option `--load-cookies` which can be used to provide a special 
 
 Note that also the HTTP `Cookie` header is tested against SQL injection if the `--level` is set to **2** or above. Read below for details.
 
-### HTTP `User-Agent` header
+### HTTP `User-Agent`头
 
 Option and switch: `--user-agent` and `--random-agent`
 
@@ -449,7 +448,7 @@ Some sites perform a server-side check of HTTP `User-Agent` header value and fai
 Note that also the HTTP `User-Agent` header is tested against SQL injection if the `--level` is set to **3** or above.
 Read below for details.
 
-### HTTP `Host` header
+### HTTP `Host`头
 
 Option: `--host`
 
@@ -457,7 +456,7 @@ You can manually set HTTP `Host` header value. By default HTTP `Host` header is 
 
 Note that also the HTTP `Host` header is tested against SQL injection if the `--level` is set to **5**. Read below for details.
 
-### HTTP `Referer` header
+### HTTP `Referer`头
 
 Option: `--referer`
 
@@ -465,13 +464,13 @@ It is possible to fake the HTTP `Referer` header value. By default **no** HTTP `
 
 Note that also the HTTP `Referer` header is tested against SQL injection if the `--level` is set to **3** or above. Read below for details.
 
-### Extra HTTP headers
+### 其余HTTP头
 
 Option: `--headers`
 
 It is possible to provide extra HTTP headers by setting the option `--headers`. Each header must be separated by a newline and it is much easier to provide them from the configuration INI file. You can take a look at the sample `sqlmap.conf` file for such case.
 
-Example against a MySQL target:
+示例（对一个MySQL目标的运行结果）：
 
 ```
 $ python sqlmap.py -u "http://192.168.21.128/sqlmap/mysql/get_int.php?id=1" -z \
@@ -511,9 +510,9 @@ Connection: close
 [...]
 ```
 
-### HTTP protocol authentication
+### HTTP协议认证
 
-Options: `--auth-type` and `--auth-cred`
+Options: `--auth-type`和`--auth-cred`
 
 These options can be used to specify which HTTP protocol authentication back-end web server implements and the valid credentials to be used to perform all HTTP requests to the target application.
 
@@ -545,7 +544,7 @@ Switch `--ignore-401`
 
 In case that you want to test the site that occasionally returns HTTP error 401 (Unauthorized), while you want to ignore it and continue tests without providing proper credentials, you can use switch `--ignore-401`
 
-### HTTP(S) proxy
+### HTTP(S)代理
 
 Options and switch: `--proxy`, `--proxy-cred`, `--proxy-file` and `--ignore-proxy`
 
@@ -568,25 +567,25 @@ In case that you want to manually set the type and port of used Tor proxy, you c
 
 You are strongly advised to use `--check-tor` occasionally to be sure that everything was set up properly. There are cases when Tor bundles (e.g. Vidalia) come misconfigured (or reset previously set configuration) giving you a false sense of anonymity. Using this switch sqlmap will check that everything works as expected by sending a single request to an official [Are you using Tor?](https://check.torproject.org/) page before any target requests. In case that check fails, sqlmap will warn you and abruptly exit.
 
-### Delay between each HTTP request
+### 每个HTTP请求的时间间隔
 
 Option: `--delay`
 
 It is possible to specify a number of seconds to hold between each HTTP(S) request. The valid value is a float, for instance `0.5` means half a second. By default, no delay is set.
 
-### Seconds to wait before timeout connection
+### 超时秒数
 
 Option: `--timeout`
 
 It is possible to specify a number of seconds to wait before considering the HTTP(S) request timed out. The valid value is a float, for instance 10.5 means ten seconds and a half. By default **30 seconds** are set.
 
-### Maximum number of retries when the HTTP connection timeouts
+### HTTP连接超时时的最大重试次数
 
 Option: `--retries`
 
 It is possible to specify the maximum number of retries when the HTTP(S) connection timeouts. By default it retries up to **three times**.
 
-### Randomly change value for given parameter(s)
+### 随机更改给定参数的值
 
 Option: `--randomize`
 
@@ -598,32 +597,32 @@ Option: `--scope`
 
 Rather than using all hosts parsed from provided logs with option `-l`, you can specify valid Python regular expression to be used for filtering desired ones.
 
-Example of valid syntax:
+正确的语法示例：
 
 ```
 $ python sqlmap.py -l burp.log --scope="(www)?\.target\.(com|net|org)"
 ```
 
-### Avoid your session to be destroyed after too many unsuccessful requests
+### 避免你的会话在过多不成功的请求后被销毁
 
 Options: `--safe-url`, `--safe-post`, `--safe-req` and `--safe-freq`
 
-Sometimes web applications or inspection technology in between destroys the session if a certain number of unsuccessful requests is performed. This might occur during the detection phase of sqlmap or when it exploits any of the blind SQL injection types. Reason why is that the SQL payload does not necessarily returns output and might therefore raise a signal to either the application session management or the inspection technology.
+有时，web应用程序或者检查测试技术会在一定量的不成功请求被执行后，销毁会话。这可能发生在sqlmap的检测阶段或者使用任何类型的SQL盲注过程中。原因是此时SQL payload不返回输出，并向应用程序会话管理系统或者检查测试发送信号。
 
-To bypass this limitation set by the target, you can provide any (or combination of) option:
+为了绕过目标设定的这些限制，你可以使用以下任意（或者几种结合）的命令：
 
-* `--safe-url`: URL address to visit frequently during testing.
-* `--safe-post`: HTTP POST data to send to a given safe URL address.
-* `--safe-req`: Load and use safe HTTP request from a file.
-* `--safe-freq`: Test requests between two visits to a given safe location.
+* `--safe-url`: 在测试中定时访问安全、正确的URL。
+* `--safe-post`: 设置正确的HTTP POST data发送给给定的安全的URL。
+* `--safe-req`: 从文件中加载并使用安全的HTTP请求。
+* `--safe-freq`: 在两次访问给定安全URL之间测试请求。
 
-This way, sqlmap will visit every a predefined number of requests a certain _safe_ URL without performing any kind of injection against it.
+这样，sqlmap就可以在不对URL执行注入的情况下访问预先设定的数量的_安全_的URL。
 
-### Turn off URL encoding of parameter values
+### 不对参数值进行URL编码
 
 Switch: `--skip-urlencode`
 
-Depending on parameter placement (e.g. GET) its value could be URL encoded by default. In some cases, back-end web servers do not follow RFC standards and require values to be send in their raw non-encoded form. Use `--skip-urlencode` in those kind of cases.
+根据参数的位置（例如，GET），参数会默认进行URL编码。在某些情况下，后端的web服务器不遵循RFC标准，需要参数以未编码的形式发送。在这些情况下，使用`--skip-urlencode`。
 
 # Bypass anti-CSRF protection
 

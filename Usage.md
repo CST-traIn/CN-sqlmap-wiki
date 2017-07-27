@@ -1,4 +1,4 @@
-# Usage
+# 用法
 
 ```
 Usage: python sqlmap.py [options]
@@ -251,37 +251,37 @@ Options:
     --wizard            Simple wizard interface for beginner users
 ```
 
-## Output verbosity
+## 输出信息的详细程度
 
 Option: `-v`
 
-This option can be used to set the verbosity level of output messages. There exist **seven** levels of verbosity. The default level is **1** in which information, warning, error, critical messages and Python tracebacks (if any occur) are displayed.
+这个操作用来设定输出信息的内容的详细级别。有**7**个详细等级。默认等级是**1**：显示基本信息、警告、错误、关键信息和（如果发生错误的话）python的错误信息追踪。
 
-* **0**: Show only Python tracebacks, error and critical messages.
-* **1**: Show also information and warning messages.
-* **2**: Show also debug messages.
-* **3**: Show also payloads injected.
-* **4**: Show also HTTP requests.
-* **5**: Show also HTTP responses' headers.
-* **6**: Show also HTTP responses' page content.
+* **0**: 只显示python错误信息追踪、错误和关键信息。
+* **1**: 同时显示基本信息和警告信息。
+* **2**: 同时显示debug信息。
+* **3**: 同时显示注入的payload。
+* **4**: 同时显示HTTP请求。
+* **5**: 同时显示HTTP响应头部。
+* **6**: 同时显示HTTP响应内容。
 
-A reasonable level of verbosity to further understand what sqlmap does under the hood is level **2**, primarily for the detection phase and the take-over functionalities. Whereas if you want to see the SQL payloads the tools sends, level **3** is your best choice. This level is also recommended to be used when you feed the developers with a potential bug report, make sure you send along with the standard output the traffic log file generated with option `-t`.
-In order to further debug potential bugs or unexpected behaviours, we recommend you to set the verbosity to level **4** or above. It should be noted that there is also a possibility to set the verbosity by using the shorter version of this option where number of letters `v` inside the provided switch (instead of option) determines the verbosity level (e.g. `-v` instead of `-v 2`, `-vv` instead of `-v 3`, `-vvv` instead of `-v 4`, etc.)
+要进一步了解sqlmap所做的，合理的级别是**2**，主要用于检测阶段和接管功能。而如果要查看sqlmap发送的SQL payload内容，级别**3**是最佳的选择。当您向开发人员提供潜在的bug报告时，建议使用这个级别，并确保在发送标准输出时，同时发送使用`-t`生成的流量日志文件。
+为了以后调试潜在的bug和不可预测的操作（所引起的后果），建议将详细级别设置为**4**或更高。也可以使用更加简短的语句来设置详细级别（比如，`-v`表示`-v 2`，`-vv`表示`-v 3`，`-vvv`表示`-v 4`，……依此类推）
 
-## Target
+## 目标
 
-At least one of these options has be provided to set the target(s).
+至少选择以下一个作为目标。
 
-### Direct connection to the database
+### 直接连接数据库
 
 Option: `-d`
 
-Run sqlmap against a single database instance. This option accepts a connection string in one of following forms: 
+对单个数据库实例运行sqlmap。这个操作接收以下任意一种形式的连接：
 
 * `DBMS://USER:PASSWORD@DBMS_IP:DBMS_PORT/DATABASE_NAME` (MySQL, Oracle, Microsoft SQL Server, PostgreSQL, etc.)
 * `DBMS://DATABASE_FILEPATH` (SQLite, Microsoft Access, Firebird, etc.)
 
-For example:
+例如：
 
 ```
 $ python sqlmap.py -d "mysql://admin:admin@192.168.21.17:3306/testdb" -f --bann\

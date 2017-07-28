@@ -374,13 +374,13 @@ Option: `-c`
 
 Option: `--method`
 
-sqlmap automatically detects the proper HTTP method to be used in HTTP requests. Nevertheless, in some cases, it is required to force the usage of specific HTTP method (e.g. `PUT`) that is not used by automatism. This is possible with usage of this option (e.g. `--method=PUT`).
+sqlmap自动检测HTTP请求中的正确的HTTP方法。然而，在一些情况下，需要使用特定的自动指定之外的HTTP方法（例如：`PUT`）。可以使用这个option来实现（例如：`--method=PUT`）。
 
 ### HTTP数据
 
 Option: `--data`
 
-By default the HTTP method used to perform HTTP requests is GET, but you can implicitly change it to POST by providing the data to be sent in the POST requests. Such data, being those parameters, are tested for SQL injection as well as any provided GET parameters.
+默认情况下，用于执行HTTP请求的方法是GET，但你可以在发送的POST请求中更改数据。这些数据作为参数，将与提供的GET参数同时进行针对SQL注入的测试。
 
 例如：
 
@@ -389,11 +389,11 @@ $ python sqlmap.py -u "http://www.target.com/vuln.php" --data="id=1" -f --banne\
 r --dbs --users
 ```
 
-### Parameter splitting character
+### 参数分割字符
 
 Option: `--param-del`
 
-There are cases when default parameter delimiter (e.g. `&` in GET and POST data) needs to be overwritten for sqlmap to be able to properly split and process each parameter separately.
+有些情况下，需要重写sqlmap的默认参数分隔符（例如：GET和POST数据中的`&`），以便能够分别正确拆分和处理每个参数。
 
 例如：
 
@@ -404,7 +404,7 @@ $ python sqlmap.py -u "http://www.target.com/vuln.php" --data="query=foobar;id=\
 
 ### HTTP `Cookie`头
 
-Options and switch: `--cookie`, `--cookie-del`, `--load-cookies` and `--drop-set-cookie`
+Options and switch: `--cookie`，`--cookie-del`，`--load-cookies`和`--drop-set-cookie`
 
 These options and switches can be used in two situations:
 
@@ -452,7 +452,7 @@ Read below for details.
 
 Option: `--host`
 
-You can manually set HTTP `Host` header value. By default HTTP `Host` header is parsed from a provided target URL.
+你可以自己设置HTTP `Host`头的值。默认情况下，HTTP `Host`头是由目标URL解析而来的。
 
 Note that also the HTTP `Host` header is tested against SQL injection if the `--level` is set to **5**. Read below for details.
 
@@ -571,31 +571,31 @@ You are strongly advised to use `--check-tor` occasionally to be sure that every
 
 Option: `--delay`
 
-It is possible to specify a number of seconds to hold between each HTTP(S) request. The valid value is a float, for instance `0.5` means half a second. By default, no delay is set.
+可以指定每个HTTP(S)请求的时间间隔秒数。有效值为浮点数，例如`0.5`表示半秒。默认情况下不设置延迟。
 
-### 超时秒数
+### 超时等待秒数
 
 Option: `--timeout`
 
-It is possible to specify a number of seconds to wait before considering the HTTP(S) request timed out. The valid value is a float, for instance 10.5 means ten seconds and a half. By default **30 seconds** are set.
+可以指定HTTP(S)的超时等待秒数。有效值是浮点数，例如10.5表示10秒半。默认情况下设置为**30秒**。
 
 ### HTTP连接超时时的最大重试次数
 
 Option: `--retries`
 
-It is possible to specify the maximum number of retries when the HTTP(S) connection timeouts. By default it retries up to **three times**.
+当HTTP(S)连接超时时，可以指定最大重试次数。 默认情况下，这个值最多为**3次**。
 
 ### 随机更改给定参数的值
 
 Option: `--randomize`
 
-It is possible to specify parameter names whose values you want to be randomly changed during each request. Length and type are being kept according to provided original values.
+你可以指定每个请求中需要被随机修改值的参数的名称。长度和类型仍为所提供的原始值。
 
-### Filtering targets from provided proxy log using regular expression
+### 使用正则表达式过滤提供的代理日志中的目标
 
 Option: `--scope`
 
-Rather than using all hosts parsed from provided logs with option `-l`, you can specify valid Python regular expression to be used for filtering desired ones.
+你可以指定用于过滤的Python正则表达式，而不用在日志中一律通过option`-l`解析的主机。
 
 正确的语法示例：
 

@@ -628,19 +628,19 @@ Switch: `--skip-urlencode`
 
 Options: `--csrf-token` and `--csrf-url`
 
-Lots of sites incorporate anti-CSRF protection in form of tokens, hidden field values that are randomly set during each page response. sqlmap will automatically try to recognize and bypass that kind of protection, but there are options `--csrf-token` and `--csrf-url` that can be used to further fine tune it. Option `--csrf-token` can be used to set the name of the hidden value that contains the randomized token. This is useful in cases when web sites use non-standard names for such fields. Option `--csrf-url` can be used for retrieval of the token value from arbitrary URL address. This is useful if the vulnerable target URL doesn't contain the necessary token value in the first place, but it is required to extract it from some other location.
+许多网站以标记的形式吸收 anti-CSRF 保护, 隐藏字段值随机设置在每个页面响应. sqlmap 将会自动尝试去识别和绕过这样的保护, 但是有些选项 `--csrf-token` 和 `--csrf-url` 可以被用来进一步微调. 选项 `--csrf-token` 可以被用来设置隐藏数值的名称包含随机的标记. 这在网页使用非标准名称的情况下是有用的. 选项 `--csrf-url` 可用于从任意的URL地址中检索标记值. 这是有用的如果脆弱的目标 URL 在初始位置不包含必要的标记值,但是它需要从一些其他的位置提取出来.
 
 ### Force usage of SSL/HTTPS
 
 Switch: `--force-ssl`
 
-In case that user wants to force usage of SSL/HTTPS requests toward the target, he can use this switch. This can be useful in cases when urls are being collected by using option `--crawl` or when Burp log is being provided with option `-l`.
+如果用户希望强制使用 SSL/HTTPS 的请求指向目标, 它可以使用这个转换. 当urls被通过使用 option `--crawl`收集时或者当Burp log被提供 option `-l`时，这将会是有用的.
 
 ### Evaluate custom python code during each request
 
 Option: `--eval`
 
-In case that user wants to change (or add new) parameter values, most probably because of some known dependency, he can provide to sqlmap a custom python code with option `--eval` that will be evaluated just before each request.
+如果用户想要改变（或添加新的）参数值, 很大可能是因为一些已知的依赖关系, 他可以给sqlmap提供一个定制的有着 `--eval` 的可以在每个请求之前进行评估的python码.
 
 For example:
 
@@ -649,63 +649,63 @@ $ python sqlmap.py -u "http://www.target.com/vuln.php?id=1&hash=c4ca4238a0b9238\
 20dcc509a6f75849b" --eval="import hashlib;hash=hashlib.md5(id).hexdigest()"
 ```
 
-Each request of such run will re-evaluate value of GET parameter `hash` to contain a fresh MD5 hash digest for current value of parameter `id`.
+这些运行的每个请求都将重新评估 GET 参数 `hash`的值以包含一个初始的 MD5 散列摘要来求得当前参数值为 `id`.
 
 ## Optimization
 
-These switches can be used to optimize the performance of sqlmap.
+这些交换机可以用来优化sqlmap的性能.
 
 ### Bundle optimization
 
 Switch: `-o`
 
-This switch is an alias that implicitly sets the following options and switches:
+这个转换是一个别名，含蓄地设置下列选项和开关:
 
 * `--keep-alive`
 * `--null-connection`
-* `--threads=3` if not set to a higher value.
+* `--threads=3` 如果没有设置一个更高的值.
 
 
-Read below for details about each switch.
+阅读下列每个转换的细节.
 
 ### Output prediction
 
 Switch: `--predict-output`
 
-This switch is used in inference algorithm for sequential statistical prediction of characters of value being retrieved. Statistical table with the most promising character values is being built based on items given in `txt/common-outputs.txt` combined with the knowledge of current enumeration used. In case that the value can be found among the common output values, as the process progresses, subsequent character tables are being narrowed more and more. If used in combination with retrieval of common DBMS entities, as with system table names and privileges, speed up is significant. Of course, you can edit the common outputs file according to your needs if, for instance, you notice common patterns in database table names or similar.
+这个转换被用于推理算法，用于被检索字符的连续统计预测价值. 统计表最具有前景的特性价值是构建基于 `txt/common-outputs.txt` 的项目，结合现阶段使用的枚举知识. 如果在这些普通的输出值中可以找到价值，随着进程发展, 随后的字符表会越来越窄. 如果用于结合检索寻常的DBMS实体，如系统表名和权限，加速是显著的. 当然，你可以根据你的需求编辑普通的输出文件，例如，如果你注意到数据库表名称或类似的常见模式.
 
-Note that this switch is not compatible with `--threads` switch.
+注意这个转换与 `--threads` 转换不兼容.
 
 ### HTTP Keep-Alive
 
 Switch: `--keep-alive`
 
-This switch instructs sqlmap to use persistent HTTP(s) connections.
+这个转换命令sqlmap 使用持久的 HTTP(s) 连接.
 
-Note that this switch is incompatible with `--proxy` switch.
+注意这个转换与 `--proxy` 转换不兼容.
 
 ### HTTP NULL connection
 
 Switch: `--null-connection`
 
-There are special HTTP request types which can be used to retrieve HTTP response's size without getting the HTTP body. This knowledge can be used in blind injection technique to distinguish `True` from `False` responses. When this switch is provided, sqlmap will try to test and exploit two different _NULL connection_ techniques: `Range` and `HEAD`. If any of these is supported by the target web server, speed up will come from the obvious saving of used bandwidth.
+有特殊的HTTP请求类型，可用于检索HTTP响应的大小而不用取得HTTP的身体. 这一技术可以运用于盲注技术的区分‘真’与‘假’的回应. 当这一转换被提供时, sqlmap 将会尝试测试和利用两个不同的 _NULL connection_ techniques: `Range` and `HEAD`. 如果它们中任一个被目标网站服务器支持, 明显的节省使用带宽将会使速度提升.
 
-These techniques are detailed in the white paper [Bursting Performances in Blind SQL Injection - Take 2 (Bandwidth)](http://www.wisec.it/sectou.php?id=472f952d79293).
+这些技术在白皮书中很详细 [Bursting Performances in Blind SQL Injection - Take 2 (Bandwidth)](http://www.wisec.it/sectou.php?id=472f952d79293).
 
-Note that this switch is incompatible with switch `--text-only`.
+注意这个转换与 `--text-only`转换不兼容.
 
 ### Concurrent HTTP(S) requests
 
 Option: `--threads`
 
-It is possible to specify the maximum number of concurrent HTTP(S) requests that sqlmap is allowed to do.
-This feature relies on [multi-threading](http://en.wikipedia.org/wiki/Multithreading) concept and inherits both its pro and its cons.
+可以指定 sqlmap 被允许的最大并发 HTTP(S) 请求数
+这一特性依赖于 [multi-threading](http://en.wikipedia.org/wiki/Multithreading) 概念并且继承了它的优缺点.
 
 This features applies to the brute-force switches and when the data fetching is done through any of the blind SQL injection techniques. For the latter case, sqlmap first calculates the length of the query output in a single thread, then starts the multi-threading. Each thread is assigned to retrieve one character of the query output. The thread ends when that character is retrieved - it takes up to 7 HTTP(S) requests with the bisection algorithm implemented in sqlmap.
 
 The maximum number of concurrent requests is set to **10** for performance and site reliability reasons.
 
-Note that this option is not compatible with switch `--predict-output`.
+注意到这一选项与 `--predict-output`转换不兼容.
 
 ## Injection
 

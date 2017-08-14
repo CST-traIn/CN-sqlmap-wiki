@@ -253,20 +253,20 @@ Options:
 
 ## 输出信息的详细程度
 
-Option: `-v`
+选项: `-v`
 
-这个操作用来设定输出信息的内容的详细级别。有**7**个详细等级。默认等级是**1**：显示基本信息、警告、错误、关键信息和（如果发生错误的话）python的错误信息追踪。
+这个操作用来设定输出信息的内容的详细级别.有**7**个详细等级.默认等级是**1**:显示基本信息 警告 错误 关键信息和(如果发生错误的话)python的错误信息追踪.
 
-* **0**: 只显示python错误信息追踪、错误和关键信息。
-* **1**: 同时显示基本信息和警告信息。
-* **2**: 同时显示debug信息。
-* **3**: 同时显示注入的payload。
-* **4**: 同时显示HTTP请求。
-* **5**: 同时显示HTTP响应头部。
-* **6**: 同时显示HTTP响应内容。
+* **0**: 只显示python错误信息追踪、错误和关键信息.
+* **1**: 同时显示基本信息和警告信息.
+* **2**: 同时显示debug信息.
+* **3**: 同时显示注入的payload.
+* **4**: 同时显示HTTP请求.
+* **5**: 同时显示HTTP响应头部.
+* **6**: 同时显示HTTP响应内容.
 
-要进一步了解sqlmap所做的，合理的级别是**2**，主要用于检测阶段和接管功能。而如果要查看sqlmap发送的SQL payload内容，级别**3**是最佳的选择。当您向开发人员提供潜在的bug报告时，建议使用这个级别，并确保在发送标准输出时，同时发送使用`-t`生成的流量日志文件。
-为了以后调试潜在的bug和不可预测的操作（所引起的后果），建议将详细级别设置为**4**或更高。也可以使用更加简短的语句来设置详细级别（比如，`-v`表示`-v 2`，`-vv`表示`-v 3`，`-vvv`表示`-v 4`，……依此类推）
+要进一步了解sqlmap所做的,合理的级别是**2**,主要用于检测阶段和接管功能.而如果要查看sqlmap发送的SQL payload内容,级别**3**是最佳的选择.当您向开发人员提供潜在的bug报告时,建议使用这个级别,并确保在发送标准输出时,同时发送使用`-t`生成的流量日志文件.
+为了以后调试潜在的bug和不可预测的操作(所引起的后果),建议将详细级别设置为**4**或更高.也可以使用更加简短的语句来设置详细级别(比如,`-v`表示`-v 2`,`-vv`表示`-v 3`,`-vvv`表示`-v 4`,……依此类推)
 
 ## 目标
 
@@ -274,9 +274,9 @@ Option: `-v`
 
 ### 直接连接数据库
 
-Option: `-d`
+选项: `-d`
 
-对单个数据库实例运行sqlmap。这个操作接收以下任意一种形式的连接：
+对单个数据库实例运行sqlmap。.这个操作接收以下任意一种形式的连接：
 
 * `DBMS://USER:PASSWORD@DBMS_IP:DBMS_PORT/DATABASE_NAME` (MySQL, Oracle, Microsoft SQL Server, PostgreSQL, etc.)
 * `DBMS://DATABASE_FILEPATH` (SQLite, Microsoft Access, Firebird, etc.)
@@ -290,7 +290,7 @@ er --dbs --users
 
 ### 目标URL
 
-Option: `-u`或者`--url`
+选项: `-u`或者`--url`
 
 对单个目标URL运行sqlmap。这个操作需要以下形式的URL：
 
@@ -305,22 +305,22 @@ $ python sqlmap.py -u "http://www.target.com/vuln.php?id=1" -f --banner --dbs -\
 
 ### 通过Burp或者WebScarab代理登录解析目标
 
-Option: `-l`
+选项: `-l`
 
-不提供单个目标URL，可以通过[Burp代理](http://portswigger.net/suite/)或者
-[WebScarab代理](http://www.owasp.org/index.php/Category:OWASP_WebScarab_Project)测试和注入HTTP请求。这个操作需要代理的HTTP请求登录文件作为参数。
+不提供单个目标URL,可以通过[Burp代理](http://portswigger.net/suite/)或者
+[WebScarab代理](http://www.owasp.org/index.php/Category:OWASP_WebScarab_Project)测试和注入HTTP请求.这个操作需要代理的HTTP请求登录文件作为参数.
 
 ### 通过远程sitemap(.xml)文件解析目标
 
-Option: `-x`
+选项: `-x`
 
-sitemap是一个文件，web管理员可以列出网站的网页位置，以告诉搜索引擎网站内容的组织形式。你可以使用`-x`来告诉sqlmap sitemap文件的位置（例如 `-x http://www.target.com/sitemap.xml`）
+sitemap是一个文件,web管理员可以列出网站的网页位置,以告诉搜索引擎网站内容的组织形式.你可以使用`-x`来告诉sqlmap sitemap文件的位置(例如 `-x http://www.target.com/sitemap.xml`)
 
 ### 扫描给定文本文件中的大量目标
 
-Option: `-m`
+选项: `-m`
 
-对给定批文件中的目标URL，sqlmap可以对其进行逐个扫描。
+对给定批文件中的目标URL,sqlmap可以对其进行逐个扫描.
 
 使用示例的批文件内容作为这个操作的参数：
 
@@ -330,9 +330,9 @@ Option: `-m`
 
 ### 从文件中加载HTTP请求
 
-Option: `-r`
+选项: `-r`
 
-sqlmap可以从文本文件中加载原始的HTTP请求。这样，您可以跳过其他一些操作（例如设置Cookie，POSTed数据等）。
+sqlmap可以从文本文件中加载原始的HTTP请求.这样,您可以跳过其他一些操作(例如设置Cookie，POSTed数据等).
 
 使用示例的HTTP请求文件内容作为这个操作的参数：
 
@@ -342,15 +342,15 @@ sqlmap可以从文本文件中加载原始的HTTP请求。这样，您可以跳�
     
     id=1
 
-请注意，如果请求是通过HTTPS，您可以结合使用`--force-ssl`来强制SSL连接到443/tcp。 或者，您可以将`：443`附加到`Host`头值的末尾。
+请注意,如果请求是通过HTTPS,您可以结合使用`--force-ssl`来强制SSL连接到443/tcp.或者,您可以将`：443`附加到`Host`头值的末尾.
 
 ### 将Google搜索到的URL作为目标处理
 
-Option: `-g`
+选项: `-g`
 
-可以基于Google搜索的结果测试并注入GET参数。
+可以基于Google搜索的结果测试并注入GET参数.
 
-这个操作使sqlmap与搜索引擎协商使其执行搜索的会话cookie，然后sqlmap会复现Google搜索的前100个结果，通过GET参数询问你是否想要测试并注入每个可能受影响的URL。
+这个操作使sqlmap与搜索引擎协商使其执行搜索的会话cookie,然后sqlmap会复现Google搜索的前100个结果,通过GET参数询问你是否想要测试并注入每个可能受影响的URL.
 
 例如：
 
@@ -360,27 +360,27 @@ $ python sqlmap.py -g "inurl:\".php?id=1\""
 
 ### 从配置文件INI中加载操作
 
-Option: `-c`
+选项: `-c`
 
-可以在配置文件INI中传递用户的操作，比如`sqlmap.conf`。
+可以在配置文件INI中传递用户的操作,比如`sqlmap.conf`.
 
-注意，如果你从命令行提供操作，当运行sqlmap时，这些操作将被评估并覆盖配置文件中的操作。
+注意,如果你从命令行提供操作,当运行sqlmap时,这些操作将被评估并覆盖配置文件中的操作.
 
 ## 请求
 
-这些操作用来详细解释如何与目标URL连接。
+这些操作用来详细解释如何与目标URL连接.
 
 ### HTTP方法
 
-Option: `--method`
+选项: `--method`
 
-sqlmap自动检测HTTP请求中的正确的HTTP方法。然而，在一些情况下，需要使用特定的自动指定之外的HTTP方法（例如：`PUT`）。可以使用这个option来实现（例如：`--method=PUT`）。
+sqlmap自动检测HTTP请求中的正确的HTTP方法.然而,在一些情况下,需要使用特定的自动指定之外的HTTP方法(例如：`PUT`).可以使用这个option来实现(例如：`--method=PUT`).
 
 ### HTTP数据
 
-Option: `--data`
+选项: `--data`
 
-默认情况下，用于执行HTTP请求的方法是GET，但你可以在发送的POST请求中更改数据。这些数据作为参数，将与提供的GET参数同时进行针对SQL注入的测试。
+默认情况下,用于执行HTTP请求的方法是GET,但你可以在发送的POST请求中更改数据.这些数据作为参数,将与提供的GET参数同时进行针对SQL注入的测试.
 
 例如：
 
@@ -391,9 +391,9 @@ r --dbs --users
 
 ### 参数分割字符
 
-Option: `--param-del`
+选项: `--param-del`
 
-有些情况下，需要重写sqlmap的默认参数分隔符（例如：GET和POST数据中的`&`），以便能够分别正确拆分和处理每个参数。
+有些情况下,需要重写sqlmap的默认参数分隔符(例如：GET和POST数据中的`&`),以便能够分别正确拆分和处理每个参数.
 
 例如：
 
@@ -404,53 +404,53 @@ $ python sqlmap.py -u "http://www.target.com/vuln.php" --data="query=foobar;id=\
 
 ### HTTP `Cookie`头
 
-Options and switch: `--cookie`，`--cookie-del`，`--load-cookies`和`--drop-set-cookie`
+选项及开关: `--cookie`,`--cookie-del`,`--load-cookies`和`--drop-set-cookie`
 
-这些option和switch课用于两种情况：
+这些option和switch课可用于两种情况：
 
-* Web应用程序需要基于Cookie进行身份验证，你拥有此类数据。
-* 你想要检测和利用SQL注入这样的头值。
+* Web应用程序需要基于Cookie进行身份验证,你拥有此类数据.
+* 你想要检测和利用SQL注入这样的头值.
 
-无论是什么原因使您需要发送带有sqlmap请求的cookie，请执行以下步骤：
+无论是什么原因使您需要发送带有sqlmap请求的cookie,请执行以下步骤：
 
-* 使用您最喜爱的浏览器登录到应用程序。
-* 从浏览器的首选项或HTTP代理屏幕获取HTTP Cookie，并复制到剪贴板。
-* 回到你的shell，将剪贴板中的内容作为选项`--cookie`的值运行sqlmap。
+* 使用您最喜爱的浏览器登录到应用程序.
+* 从浏览器的首选项或HTTP代理屏幕获取HTTP Cookie,并复制到剪贴板.
+* 回到你的shell,将剪贴板中的内容作为选项`--cookie`的值运行sqlmap.
 
-请注意，HTTP“Cookie”头值通常由`;`字符分隔，**不是**由`＆`分隔。 sqlmap可以将它们识别为单独的`parameter = value`集，以及GET和POST参数。如果分离字符不是`;`，可以使用option`--cookie-del`指定。
+请注意,HTTP“Cookie”头值通常由`;`字符分隔,**不是**由`＆`分隔. sqlmap可以将它们识别为单独的`parameter = value`集,以及GET和POST参数.如果分离字符不是`;`,可以使用option`--cookie-del`指定.
 
-在通信期间，Web应用程序使用“Set-Cookie”头响应，sqlmap将自动将其所有其他HTTP请求中的值用作“Cookie”头。 sqlmap还将自动测试这些值以进行SQL注入。这可以通过提供switch`--drop-set-cookie`来避免——sqlmap将忽略任何即将到来的“Set-Cookie”头。
+在通信期间,Web应用程序使用“Set-Cookie”头响应,sqlmap将自动将其所有其他HTTP请求中的值用作“Cookie”头. sqlmap还将自动测试这些值以进行SQL注入.这可以通过提供switch`--drop-set-cookie`来避免——sqlmap将忽略任何即将到来的“Set-Cookie”头.
 
-反之亦然，如果您提供一个带有`--cookie`选项的HTTP`Cookie`头，目标URL发送随时一个HTTP
-`Set-Cookie`标题，sqlmap会询问你使用哪一组cookie用于以下HTTP请求。
+反之亦然,如果您提供一个带有`--cookie`选项的HTTP`Cookie`头,目标URL发送随时一个HTTP
+`Set-Cookie`标题,sqlmap会询问你使用哪一组cookie用于以下HTTP请求.
 
-还有一个option`--load-cookies'可用于提供包含Netscape / wget格式化的cookie的特殊文件。
+还有一个option`--load-cookies' 可用于提供包含Netscape / wget格式化的cookie的特殊文件.
 
-请注意，如果`--level`设置为**2**或更高版本，那么HTTP`Cookie`标头也将针对SQL注入进行测试。详情请看下面。
+请注意,如果`--level`设置为**2**或更高版本,那么HTTP`Cookie`标头也将针对SQL注入进行测试.详情请看下面.
 
 ### HTTP `User-Agent`头
 
-Option and switch: `--user-agent` and `--random-agent`
+选项及开关: `--user-agent`和`--random-agent`
 
-默认情况下，sqlmap使用以下`User-Agent`头值执行HTTP请求：
+默认情况下,sqlmap使用以下`User-Agent`头值执行HTTP请求：
 
     sqlmap/1.0-dev-xxxxxxx (http://sqlmap.org)
 
-但是，可以通过提供自定义User-Agent作为选项的参数，使用option`--user-agent`伪造它。
+但是,可以通过提供自定义User-Agent作为选项的参数,使用option`--user-agent`伪造它.
 
-此外，通过提供交换机`--random-agent`，sqlmap将从`./ txt / user-agents.txt`文本文件中随机选择一个`User-Agent`，并将其用于会话中的所有HTTP请求。
+此外,通过提供交换机`--random-agent`,sqlmap将从`./ txt / user-agents.txt`文本文件中随机选择一个`User-Agent`,并将其用于会话中的所有HTTP请求.
 
-某些站点执行HTTP`User-Agent`头值的服务器端检查，如果没有提供有效的`User-Agent`，其值不是预期的或被Web应用程序防火墙或类似的入侵黑名单，则HTTP响应失败预防系统。在这种情况下，sqlmap会显示如下消息：
+某些站点执行HTTP`User-Agent`头值的服务器端检查,如果没有提供有效的`User-Agent`,其值不是预期的或被Web应用程序防火墙或类似的入侵黑名单,则HTTP响应失败预防系统.在这种情况下,sqlmap会显示如下消息：
 
     [hh:mm:20] [ERROR] the target URL responded with an unknown HTTP status code, try to 
     force the HTTP User-Agent header with option --user-agent or --random-agent
 
-请注意，如果`--level`设置为** 3 **或更高版本，那么HTTP`User-Agent`标头也将针对SQL注入进行测试。
+请注意,如果`--level`设置为** 3 **或更高版本,那么HTTP`User-Agent`标头也将针对SQL注入进行测试。
 详情请看下面。
 
 ### HTTP `Host`头
 
-Option: `--host`
+选项: `--host`
 
 你可以自己设置HTTP `Host`头的值。默认情况下，HTTP `Host`头是由目标URL解析而来的。
 
@@ -623,25 +623,25 @@ Switch: `--skip-urlencode`
 
 根据参数的位置（例如，GET），参数会默认进行URL编码。在某些情况下，后端的web服务器不遵循RFC标准，需要参数以未编码的形式发送。在这些情况下，使用`--skip-urlencode`。
 
-# Bypass anti-CSRF protection
+# 绕过anti-CSRF保护
 
-Options: `--csrf-token` and `--csrf-url`
+选项: `--csrf-token`和`--csrf-url`
 
 许多网站以标记的形式吸收 anti-CSRF 保护, 隐藏字段值随机设置在每个页面响应. sqlmap 将会自动尝试去识别和绕过这样的保护, 但是有些选项 `--csrf-token` 和 `--csrf-url` 可以被用来进一步微调. 选项 `--csrf-token` 可以被用来设置隐藏数值的名称包含随机的标记. 这在网页使用非标准名称的情况下是有用的. 选项 `--csrf-url` 可用于从任意的URL地址中检索标记值. 这是有用的如果脆弱的目标 URL 在初始位置不包含必要的标记值,但是它需要从一些其他的位置提取出来.
 
-### Force usage of SSL/HTTPS
+### SSL/HTTPS的强力使用
 
-Switch: `--force-ssl`
+开关: `--force-ssl`
 
 如果用户希望强制使用 SSL/HTTPS 的请求指向目标, 它可以使用这个转换. 当urls被通过使用 option `--crawl`收集时或者当Burp log被提供 option `-l`时，这将会是有用的.
 
-### Evaluate custom python code during each request
+### 在每个请求中评估定制的python代码
 
-Option: `--eval`
+选项: `--eval`
 
 如果用户想要改变（或添加新的）参数值, 很大可能是因为一些已知的依赖关系, 他可以给sqlmap提供一个定制的有着 `--eval` 的可以在每个请求之前进行评估的python码.
 
-For example:
+例如:
 
 ```
 $ python sqlmap.py -u "http://www.target.com/vuln.php?id=1&hash=c4ca4238a0b9238\
@@ -650,13 +650,13 @@ $ python sqlmap.py -u "http://www.target.com/vuln.php?id=1&hash=c4ca4238a0b9238\
 
 这些运行的每个请求都将重新评估 GET 参数 `hash`的值以包含一个初始的 MD5 散列摘要来求得当前参数值为 `id`.
 
-## Optimization
+## 最优化
 
 这些交换机可以用来优化sqlmap的性能.
 
-### Bundle optimization
+### 组团最优化
 
-Switch: `-o`
+开关: `-o`
 
 这个转换是一个别名，含蓄地设置下列选项和开关:
 
@@ -667,25 +667,25 @@ Switch: `-o`
 
 阅读下列每个转换的细节.
 
-### Output prediction
+### 输出预报
 
-Switch: `--predict-output`
+开关: `--predict-output`
 
 这个转换被用于推理算法，用于被检索字符的连续统计预测价值. 统计表最具有前景的特性价值是构建基于 `txt/common-outputs.txt` 的项目，结合现阶段使用的枚举知识. 如果在这些普通的输出值中可以找到价值，随着进程发展, 随后的字符表会越来越窄. 如果用于结合检索寻常的DBMS实体，如系统表名和权限，加速是显著的. 当然，你可以根据你的需求编辑普通的输出文件，例如，如果你注意到数据库表名称或类似的常见模式.
 
 注意这个转换与 `--threads` 转换不兼容.
 
-### HTTP Keep-Alive
+### HTTP 持久连接
 
-Switch: `--keep-alive`
+开关: `--keep-alive`
 
 这个转换命令sqlmap 使用持久的 HTTP(s) 连接.
 
 注意这个转换与 `--proxy` 转换不兼容.
 
-### HTTP NULL connection
+### HTTP空连接
 
-Switch: `--null-connection`
+开关: `--null-connection`
 
 有特殊的HTTP请求类型，可用于检索HTTP响应的大小而不用取得HTTP的身体. 这一技术可以运用于盲注技术的区分‘真’与‘假’的回应. 当这一转换被提供时, sqlmap 将会尝试测试和利用两个不同的 _NULL connection_ techniques: `Range` and `HEAD`. 如果它们中任一个被目标网站服务器支持, 明显的节省使用带宽将会使速度提升.
 
@@ -693,56 +693,56 @@ Switch: `--null-connection`
 
 注意这个转换与 `--text-only`转换不兼容.
 
-### Concurrent HTTP(S) requests
+### 并发HTTP(S)请求
 
-Option: `--threads`
+选项: `--threads`
 
 可以指定 sqlmap 被允许的最大并发 HTTP(S) 请求数
 这一特性依赖于 [multi-threading](http://en.wikipedia.org/wiki/Multithreading) 概念并且继承了它的优缺点.
 
-This features applies to the brute-force switches and when the data fetching is done through any of the blind SQL injection techniques. For the latter case, sqlmap first calculates the length of the query output in a single thread, then starts the multi-threading. Each thread is assigned to retrieve one character of the query output. The thread ends when that character is retrieved - it takes up to 7 HTTP(S) requests with the bisection algorithm implemented in sqlmap.
+这一特性适用于brute-force选项并且当数据获取通过任何盲溶胶注入技术完成时. 对于后一种情况,sqlmap首先计算出在单线程序中搜索请求输出的长度, 然后开始多线程序.每个线程都被分配来检索查询输出的一个字符. 当这个字符被检索时，这个线程结束-它在sqlmap中通过执行二分法占据了7个HTTP(S)请求.
 
-The maximum number of concurrent requests is set to **10** for performance and site reliability reasons.
+由于性能和站点可靠性的原因，并发请求的最大值设置为**10**.
 
 注意到这一选项与 `--predict-output`转换不兼容.
 
-## Injection
+## 诸如
 
-These options can be used to specify which parameters to test for, provide custom injection payloads and optional tampering scripts.
+这些选项可以被用来指定测试哪个参数, 提供自定义注入有效载荷和可选的篡改脚本.
 
-### Testable parameter(s)
+### 可测试的参数
+选项: `-p`, `--skip`和 `--param-exclude`
 
-Options: `-p`, `--skip` and `--param-exclude`
+在默认情况下，sqlmap测试都获得了参数和POST参数. 当`--level`的值是>= **2** 它还测试了头值HTTP `Cookie`头值. 当这个值>= **3**它还测试了HTTP用户代理和HTTP Referer头部值的SQL注入. 您可以手动指定您希望sqlmap进行测试的一个由逗号分隔的参数列表. 这也会绕过对`--level的依赖`. 
 
-By default sqlmap tests all GET parameters and POST parameters. When the value of `--level` is >= **2** it tests also HTTP `Cookie` header values. When this value is >= **3** it tests also HTTP `User-Agent` and HTTP `Referer` header value for SQL injections. It is however possible to manually specify a comma-separated list of parameter(s) that you want sqlmap to test. This will bypass the dependence on value of `--level` too. 
+例如, 为了测试GET参数 `id`和只为了HTTP `User-Agent`,提供 `-p "id,user-agent"`.
 
-For instance, to test for GET parameter `id` and for HTTP `User-Agent` only, provide `-p "id,user-agent"`.
+如果用户想要从测试中排除某些参数, 他可以使用选项`--skip`. 当您想要使用更高的`--level`并且测试所有可用的参数不包括通常被测试的HTTP头信息时，——跳过这一点特别有用.
 
-In case that user wants to exclude certain parameters from testing, he can use option `--skip`. That is especially useful in cases when you want to use higher value for `--level` and test all available parameters excluding some of HTTP headers normally being tested.
+例如, 为了在`--level=5`跳过HTTP头`User-Agent`和`Referer`的测试, 提供 `--skip="user-agent,referer"`.
 
-For instance, to skip testing for HTTP header `User-Agent` and HTTP header `Referer` at `--level=5`, provide `--skip="user-agent,referer"`.
+也有一种可能将某些参数排除在基于一个运行在他们名字之上的正常表达的测试中.在这些情况下，用户可以使用选项`--param-exclude`.
 
-There is also a possibility to exclude certain parameters from testing based on a regular expression run on their names. In those kind of cases user can use option `--param-exclude`.
+例如, 要跳过在他们名字中包含字符串`token`或`session`的参数测试,需要提供`--param-exclude="token|session"`.
 
-For instance, to skip testing for parameters which contain string `token` or `session` in their names, provide `--param-exclude="token|session"`.
+#### URI注入项目
 
-#### URI injection point
+当注入点在URI本身之中会有些特殊的情况. sqlmap 不会对URI路径执行任何自动测试,除非手动指向. 你必须在命令行中通过追加一个星号(`*`) (注意:也支持 Havij风格的`%INJECT HERE%`)在每个URI点之后，你需要sqlmap来测试和利用SQL注入. 
 
-There are special cases when injection point is within the URI itself. sqlmap does not perform any automatic test against URI paths, unless manually pointed to. You have to specify these injection points in the command line by appending an asterisk (`*`) (Note: Havij style `%INJECT HERE%` is also supported) after each URI point that you want sqlmap to test for and exploit a SQL injection. 
+这在某些情况下格外有用,例如, Apache网站[mod_rewrite](http://httpd.apache.org/docs/current/mod/mod_rewrite.html)模块的使用或其他类似的技术.
 
-This is particularly useful when, for instance, Apache web server's [mod_rewrite](http://httpd.apache.org/docs/current/mod/mod_rewrite.html) module is in use or other similar technologies.
-
-An example of valid command line would be:
+一个有效的命令行示例是:
 
 ```
 $ python sqlmap.py -u "http://targeturl/param1/value1*/param2/value2/"
 ```
 
-#### Arbitrary injection point
+#### 任意的注入点
 
-Similar to URI injection point, asterisk (`*`) (Note: Havij style `%INJECT HERE%` is also supported) can also be used to point to the arbitrary injection point inside GET, POST or HTTP headers. Injection point can be specified by marking it inside the GET parameter value(s) provided with option `-u`, POST parameter value(s) provided with option `--data`, HTTP header value(s) provided with options `-H`, `--headers`, `--user-agent`, `--referer` and/or `--cookie`, or at generic place inside HTTP request loaded from file with option `-r`.
+类似于URI注入点，星号()(注意:Havij格式%的注入%也被支持)也可以用于指向GET、POST或HTTP头部中的任意注入点。
+注入点可以通过在GET参数值(s)中指定，提供选项-u，POST参数值(s)提供选项-数据，HTTP头值(s)提供选项-H，-header，-用户代理，-引用和/或-cookie，或者是在HTTP请求中从文件中加载-r的通用位置。.
 
-An example of valid command line would be:
+一个有效的命令行示例是:
 
 ```
 $ python sqlmap.py -u "http://targeturl" --cookie="param1=value1*;param2=value2"
@@ -750,9 +750,9 @@ $ python sqlmap.py -u "http://targeturl" --cookie="param1=value1*;param2=value2"
 
 ### Force the DBMS
 
-Option: `--dbms`
+选项: `--dbms`
 
-By default sqlmap automatically detects the web application's back-end database management system. sqlmap fully supports the following database management systems: 
+默认情况下,sqlmap自动检测web应用程序的后端数据库管理系统.Sqlmap完全支持以下数据库管理系统: 
 
 * MySQL
 * Oracle
@@ -767,68 +767,67 @@ By default sqlmap automatically detects the web application's back-end database 
 * HSQLDB
 * Informix
 
-If for any reason sqlmap fails to detect the back-end DBMS once a SQL injection has been identified or if you want to avoid an active fingeprint, you can provide the name of the back-end DBMS yourself (e.g. `postgresql`). For MySQL and Microsoft SQL Server provide them respectively in the form `MySQL  <version>` and `Microsoft SQL Server  <version> `, where ` <version>` is a valid version for the DBMS; for instance `5.0` for MySQL and `2005` for Microsoft SQL Server.
+如果因为任何原因sqlmap未能探测到DBMS后端,一旦SQL注入点被识别或者你想要避免一个有效的指纹,你可以提供DBMS自己的后端名称（e.g. `postgresql`）.对于MySQL 和Microsoft SQL Server,分别给他们提供`MySQL  <version>` and `Microsoft SQL Server  <version> `的形式,在这里` <version>`对于DBMS来说是一个有效的版本; 例如 MySQL和2005年微软SQL Server 5.0.
 
-In case you provide `--fingerprint` together with `--dbms`, sqlmap will only perform the extensive fingerprint for the specified database management system only, read below for further details. 
+如果你提供`--fingerprint` 和 `--dbms`,sqlmap只会执行广泛的仅为指定的数据库管理系统的指纹,详情请阅读下面的内容. 
 
-Note that this option is **not** mandatory and it is strongly recommended to use it **only if you are absolutely sure** about the back-end database management system. If you do not know it, let sqlmap automatically fingerprint it for you.
+请注意这个选项不是强制性的并且强烈建议只有当你绝对确定后端数据库管理系统时才使用它.如果你不知道它,让sqlmap自动为你以指纹印记.
 
-### Force the database management system operating system name
+### 强制数据库管理系统的操作系统名称
 
-Option: `--os`
+选项: `--os`
 
-By default sqlmap automatically detects the web application's back-end database management system underlying operating system when this information is a dependence of any other provided switch or option. At the moment the fully supported operating systems are:
+在默认情况下,sqlmap会自动检测web应用程序的后端数据库管理系统所代表的操作系统,当这个信息是其他任何所提供的转换或选项的依赖时.在这种情况下,完全支持的操作系统是:
 
 * Linux
 * Windows
 
-It is possible to force the operating system name if you already know it so that sqlmap will avoid doing it itself.
+如果你已经知道了这个操作系统的名称,那么你就可以强制运行它,这样sqlmap自己就可以避免运行该程序.
 
-Note that this option is **not** mandatory and it is strongly recommended to use it **only if you are absolutely sure** about the back-end database management system underlying operating system. If you do not know it, let sqlmap automatically identify it for you. 
+请注意，此选项不是强制性的，并且强烈推荐使用它，除非您完全确定后台数据库管理系统的底层操作系统。
+如果您不知道它，那么让sqlmap自动为您识别它. 
 
-### Force usage of big numbers for invalidating values
+### 强制使用无效值的大数字
 
-Switch: `--invalid-bignum`
+开关: `--invalid-bignum`
 
-In cases when sqlmap needs to invalidate original parameter value (e.g. `id=13`) it uses classical negation (e.g. `id=-13`). With this switch it is possible to force the usage of large integer values to fulfill the same goal (e.g. `id=99999999`).
+如果当sqlmap需要使原始参数值失效时 (e.g. `id=13`),它会使用经典的参数非 (e.g. `id=-13`).有了这个转换就可以强制使用大整数值来实习相同的目标(e.g. `id=99999999`).
 
-### Force usage of logical operations for invalidating values
+### 强制使用逻辑操作，以使失效值失效
+开关: `--invalid-logical`
 
-Switch: `--invalid-logical`
+万一当sqlmap需要使原始参数值失效时(e.g. `id=13`),它使用经典否定(e.g. `id=-13`).有了这个转换就可以强制使用布尔运算来实现同样的目标(e.g. `id=13 AND 18=19`).
+### 对无效值的随机字符串使用强制使用
 
-In cases when sqlmap needs to invalidate original parameter value (e.g. `id=13`) it uses classical negation (e.g. `id=-13`). With this switch it is possible to force the usage of boolean operations to fulfill the same goal (e.g. `id=13 AND 18=19`).
+开关: `--invalid-string`
 
-### Force usage of random strings for invalidating values
+万一当sqlmap需要使原始参数值失效时(e.g. `id=13`),它使用经典否定(e.g. `id=-13`).有了这个转换就可以强制使用随机字符串来实现相同的目标 (e.g. `id=akewmc`).
 
-Switch: `--invalid-string`
+### 关闭有效载荷铸造机构
 
-In cases when sqlmap needs to invalidate original parameter value (e.g. `id=13`) it uses classical negation (e.g. `id=-13`). With this switch it is possible to force the usage of random strings to fulfill the same goal (e.g. `id=akewmc`).
+开关 `--no-cast`
 
-### Turn off payload casting mechanism
+在检索结果时,sqlmap使用一种机制,其中所有的条目都被投到字符串类型并且在空值的情况下被替换为空格字符.这样做是为了阻止任何错误状态(e.g. concatenation of `NULL` values with string values) 并且简化数据检测过程本身.然而,有报告的案例(e.g. older versions of MySQL DBMS)显示这个机构需要被关闭（使用这个开关）因为数据检索本身存在问题（例如,没有返回值）.
 
-Switch: `--no-cast`
+### 关闭串口机构
 
-When retrieving results, sqlmap uses a mechanism where all entries are being casted to string type and replaced with a whitespace character in case of `NULL` values. That is being made to prevent any erroneous states (e.g. concatenation of `NULL` values with string values) and to easy the data retrieval process itself. Nevertheless, there are reported cases (e.g. older versions of MySQL DBMS) where this mechanism needed to be turned-off (using this switch) because of problems with data retrieval itself (e.g. `None` values are returned back).
+开关: `--no-escape`
 
-### Turn off string escaping mechanism
+当sqlmap需要在负载中使用（单引号分隔）字符串时(e.g. `SELECT 'foobar'`),这些数值都自动被逃避(e.g. `SELECT CHAR(102)+CHAR(111)+CHAR(111)+CHAR(98)+CHAR(97)+CHAR(114)`).那是因为两件事情：有效负载内容的混淆和防止查询逃逸机制的潜在问题.
 
-Switch: `--no-escape`
+### 自定义注入有效载荷
 
-In cases when sqlmap needs to use (single-quote delimited) string values inside payloads (e.g. `SELECT 'foobar'`), those values are automatically being escaped (e.g. `SELECT CHAR(102)+CHAR(111)+CHAR(111)+CHAR(98)+CHAR(97)+CHAR(114)`). That is being done because of two things: obfuscation of payload content and preventing potential problems with query escaping mechanisms (e.g. `magic_quotes` and/or `mysql_real_escape_string`) at the back-end server. User can use this switch to turn it off (e.g. to reduce payload size).
+选项: `--prefix`和`--suffix`
 
-### Custom injection payload
+在某些情况下,只有当用户提供了附加到注入负载的特定后缀时,易受攻击的参数才可以被利用.另一种情况是当用户已经知道该查询语法并希望通过直接提供注入有效负载前缀和后缀来检测和利用SQL注入时,这些选项本身会轻易的出现. 
 
-Options: `--prefix` and `--suffix`
-
-In some circumstances the vulnerable parameter is exploitable only if the user provides a specific suffix to be appended to the injection payload. Another scenario where these options come handy presents itself when the user already knows that query syntax and want to detect and exploit the SQL injection by directly providing a injection payload prefix and suffix. 
-
-Example of vulnerable source code:
+易受攻击的源代码示例:
 
     $query = "SELECT * FROM users WHERE id=('" . $_GET['id'] . "') LIMIT 0, 1";
 
-To detect and exploit this SQL injection, you can either let sqlmap detect the **boundaries** (as in combination of SQL payload prefix and suffix) for you during the detection phase, or provide them on your own.
+要检测并利用这个SQL资料隐码,你可以在检测阶段让sqlmap为你探测到边界 (as in combination of SQL payload prefix and suffix),或者自行提供.
 
-For example: 
+例如: 
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/mysql/get_str_brackets.php\
@@ -836,25 +835,25 @@ $ python sqlmap.py -u "http://192.168.136.131/sqlmap/mysql/get_str_brackets.php\
 [...]
 ```
 
-This will result in all sqlmap requests to end up in a query as follows:
+这将导致所有sqlmap请求以如下方式结束查询:
 
     $query = "SELECT * FROM users WHERE id=('1') <PAYLOAD> AND ('abc'='abc') LIMIT 0, 1";
 
-Which makes the query syntactically correct.
+这使得查询语法正确.
 
-In this simple example, sqlmap could detect the SQL injection and exploit it without need to provide custom boundaries, but sometimes in real world application it is necessary to provide it when the injection point is within nested `JOIN` queries for instance. 
+在这个简单的示例中,sqlmap可以检测SQL资料隐码并利用它而不需要提供自定义边界,但有时在实际应用中,当注入点在嵌套链接的查询中时,则必须要提供它. 
 
-### Tamper injection data
+### Tamper注入数据
 
-Option: `--tamper`
+选项: `--tamper`
 
-sqlmap itself does no obfuscation of the payload sent, except for strings between single quotes replaced by their `CHAR()`-alike representation. 
+Sqlmap本身并没有混淆发送的负载,除了两个引号之间的字符串替换为它们的`CHAR()`-相似的表示. 
 
-This option can be very useful and powerful in situations where there is a weak input validation mechanism between you and the back-end database management system. This mechanism usually is a self-developed input validation routine called by the application source code, an expensive enterprise-grade IPS appliance or a web application firewall (WAF). All buzzwords to define the same concept, implemented in a different way and costing lots of money, usually. 
+这个选项可以非常有用和强大,在你和后端数据库管理系统之间存在一个弱输入验证机制的情况下.这种机制通常是由应用程序代码、昂贵的企业级IPS设备或web应用程序防火墙（WAF）所调用的子开发的输入验证程序.所有的这些术语通常都定义了相同的概念,以不同的方式实现并且耗费了大量的金钱. 
 
-To take advantage of this option, provide sqlmap with a comma-separated list of tamper scripts and this will process the payload and return it transformed. You can define your own tamper scripts, use sqlmap ones from the `tamper/` folder or edit them as long as you concatenate them comma-separated as value of the option `--tamper` (e.g. `--tamper="between,randomcase"`). 
+为了利用这个选项,给sqlmap提供一个以逗号分隔开的篡改脚本并且这将处理负载和返回已经改变的形态.你可以定义你自己的篡改脚本,在 `tamper/` 文件夹中使用sqlmap或者编辑它们,只要你以选项`--tamper` (e.g. `--tamper="between,randomcase"`)的值连接它们并以逗号隔开 
 
-The format of a valid tamper script is as follows:
+一个有效的篡改脚本的格式 如下:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.python}
 # Needed imports
@@ -877,9 +876,9 @@ def tamper(payload):
     return retVal
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
-You can check valid and usable tamper scripts in the `tamper/` directory.
+你可以在`tamper/`目录中检查有效和可用的篡改脚本.
 
-Example against a MySQL target assuming that `>` character, spaces and capital `SELECT` string are banned:
+对于一个MySQL目标的示例 假定`>`字符,空格和`SELECT`字符串都被禁止:
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/mysql/get_int.php?id=1" --\
@@ -906,60 +905,60 @@ rmation_schema.tables/**/group/**/bY/**/x)a)
 [...]
 ```
 
-## Detection
+## 检测
 
-These options can be used to customize the detection phase.
+这些选项可以被用于自定义检测阶段.
 
 ### Level
 
-Option: `--level`
+选项: `--level`
 
-This option requires an argument which specifies the level of tests to perform. There are **five** levels. The default value is **1** where limited number of tests (requests) are performed. Vice versa, level **5** will test verbosely for a much larger number of payloads and boundaries (as in pair of SQL payload prefix and suffix). The payloads used by sqlmap are specified in the textual file `xml/payloads.xml`. Following the instructions on top of the file, if sqlmap misses an injection, you should be able to add your own payload(s) to test for too!
+这个选项需要一个参数来指定要执行的测试级别.一共有五个等级.默认值是**1**在这里有限的测试（请求）被执行.反之亦然,等级**5**将会对更多的有效负载和边界（如对SQL有效负载前缀和后缀）进行冗长的测试.Sqlmap使用的有效负载在文本文件 `xml/payloads.xml`中指定.按照文件顶部的指令,如果sqlmap错过了注入点,你应该能够添加自己的负载来测试工具!
 
-Not only this option affects which payload sqlmap tries, but also which injection points are taken in exam: GET and POST parameters are **always** tested, HTTP Cookie header values are tested from level **2** and HTTP User-Agent/Referer headers' value is tested from level **3**.
+这个选项不仅影响了有效载荷sqlmap的尝试,也影响了在测试中使用的注入点：GET和POST参数总是被测试,HTTP Cookie头部值从**2**被测试并且HTTP User-Agent/Referer的头部值从**3**被测试.
 
-All in all, the harder it is to detect a SQL injection, the higher the `--level` must be set.
+总之,检测SQL资料隐码越难,就必须设置更高的级别.
 
-It is strongly recommended to higher this value before reporting to the mailing list that sqlmap is not able to detect a certain injection point. 
+强烈建议在向邮件列表报告sqlmap无法检测到某个特定的点时提高这个值. 
 
 ### Risk
 
-Option: `--risk`
+选项: `--risk`
 
-This option requires an argument which specifies the risk of tests to perform. There are **three** risk values. The default value is **1** which is innocuous for the majority of SQL injection points. Risk value 2 adds to the default level the tests for heavy query time-based SQL injections and value 3 adds also `OR`-based SQL injection tests.
+这个选项需要一个参数来指定要执行的测试的风险.有**three**风险值.默认值是**1**,对于大多数SQL资料隐码点来说是无害的.风险值2添加到默认级别,用于对基于查询时间的SQL资料隐码进行测试,并且值3也添加到基于SQL资料隐码测试的`OR`上.
 
-In some instances, like a SQL injection in an `UPDATE` statement, injecting an `OR`-based payload can lead to an update of all the entries of the table, which is certainly not what the attacker wants. For this reason and others this option has been introduced: the user has control over which payloads get tested, the user can arbitrarily choose to use also potentially dangerous ones. As per the previous option, the payloads used by sqlmap are specified in the textual file `xml/payloads.xml` and you are free to edit and add your owns.
+在某些情况下,就像SQL注入点在一个`UPDATE`状态下,注入一个基于负载的`OR`可以导致表的所有条目更新,这肯定不是攻击者想要的.由于这个原因和其他原因,这个选项已经被介绍了：用户已经控制了被测试过的那些有效荷载,使用者也可以任意选择使用也有潜在危险的那些.在前面的选项中,sqlmap使用的有效负载在文本文件`xml/payloads.xml`中被指定并且你可以自由编辑和添加你所拥有的.
 
-### Page comparison
+### 页面比较
 
-Options: `--string`, `--not-string`, `--regexp` and `--code`
+选项: `--string`, `--not-string`, `--regexp`和`--code`
 
-By default the distinction of a `True` query from a `False` one (rough concept behind boolean-based blind SQL injection vulnerabilities) is done by comparing the injected requests page content with the original not injected page content.
-Not always this concept works because sometimes the page content changes at each refresh even not injecting anything, for instance when the page has a counter, a dynamic advertisement banner or any other part of the HTML which is rendered dynamically and might change in time not only consequently to user's input. To bypass this limit, sqlmap tries hard to identify these snippets of the response bodies and deal accordingly. Sometimes it may fail, that is why the user can provide a string (`--string` option) which **should** be present on original page (though it is not a requirement) **and** on all True injected query pages, but that it is **not** on the False ones. Instead of static string, the user can provide a regular expression (`--regexp` option). Alternatively, user can provide a string (`--not-string` option) which is **not** present on original page **and** not on all True injected query pages, but appears **always** on False ones.
+默认情况下,`True`查询和`False`查询的区别（粗略的概念在布尔型注入漏洞之后）是通过比较注入的请求页面内容与原始的未注入的页面内容相比.
+这一概念并不总是起作用因为有时候在每次刷新时页面的内容会改变即使没有注入任何东西,例如当页面有一个计数器时,一个动态的广告横幅或HTML的其他任何部分在呈现动态和可能及时改变时不仅仅是因为用户的输入.为了绕过这一限制,sqlmap努力尝试识别这些响应主体和相应交易的这些代码片段.有时可能会失败,这就是为什么用户可以提供一个字符串（`--string` option）,在这里 **should**在原始页面被呈现（尽管这不是一个要求）并且在所有 True 被注入的查询页面,但是这不是在 False 页面上.除了静态字符串,用户可以提供一个正则表达式（`--regexp` option）.或者,用户可以提供一个字符串（`--not-string` option）这并没有呈现在原始页面上并且不在所有的 True 被注入的查询页面,但是总是出现在 False 页面上.
 
-Such data is easy for an user to retrieve, simply try to inject into the affected parameter an invalid value and compare manually the original (not injected) page content with the injected wrong page content. This way the distinction will be based upon string presence or regular expression match. 
+这样的数据对用户来说很容易检索,只需要尝试将无效值注入到受影响的参数中并将原始的（未注入的）页面内容与注入错误的页面内容进行比较.这样这种区别将基于字符串存在或者正则表达式匹配. 
 
-In cases when user knows that the distinction of a `True` query from a `False` one can be done using HTTP code (e.g. `200` for `True` and `401` for `False`), he can provide that information to sqlmap (e.g. `--code=200`).
+如果用户知道`True`查询和`False`查询的区别可以使用HTML代码来完成（e.g. `200` for `True` and `401` for `False`）,他可以给sqlmap提供信息（e.g. `--code=200`）.
 
-Switches: `--text-only` and `--titles`
+开关: `--text-only` `--和titles`
 
-In cases when user knows that the distinction of a `True` query from a `False` one can be done using HTML title (e.g. `Welcome` for `True` and `Forbidden` for `False`), he can turn turn on title-based comparison using switch `--titles`.
+如果用户知道`True`查询和`False`查询的区别可以使用HTML标题来完成（e.g. `Welcome` for `True` and `Forbidden` for `False`）,他可以使用开关`--titles`来打开基于标题的比较.
 
-In cases with lot of active content (e.g. scripts, embeds, etc.) in the HTTP responses' body, you can filter pages (switch `--text-only`) just for their textual content. This way, in a good number of cases, you can automatically tune the detection engine.
+如果在HTTP响应的主体中有大量的活动内容（例如：脚本、嵌入等）,那么你就可以根据文本内容过滤页面（switch `--text-only`）.这样,在大多数情况下,你可以自动调优检测引擎.
 
-## Techniques
+## 技巧
 
-These options can be used to tweak testing of specific SQL injection techniques.
+这些选项可以被用来调整特定的SQL资料隐码技术.
 
-### SQL injection techniques to test for
+### 用于测试的SQL注入技术
 
-Option: `--technique`
+选项: `--technique`
 
-This option can be used to specify which SQL injection type to test for. By default sqlmap tests for **all** types/techniques it supports.
+这个选项可以被用来指定要测试的SQL资料隐码类型.在默认情况下,sqlmap来测试所有它所支持的类型/技术.
 
-In certain situations you may want to test only for one or few specific types of SQL injection thought and this is where this option comes into play. 
+在特定的情形下你可能只想要测试一个或几个特定类型的SQL资料隐码想法并且这就是这个选项发挥作用的地方. 
 
-This option requires an argument. Such argument is a string composed by any combination of `B`, `E`, `U`, `S`, `T` and `Q` characters where each letter stands for a different technique: 
+这个选项需要一个逻辑论证.这样的论证是由`B`,`E`,`U`,`S`,`T` 和`Q`字母的任意组合形成的字符串,每个字母代表不同的技术: 
 
 * `B`: Boolean-based blind
 * `E`: Error-based
@@ -968,53 +967,54 @@ This option requires an argument. Such argument is a string composed by any comb
 * `T`: Time-based blind
 * `Q`: Inline queries
 
-For instance, you can provide `ES` if you want to test for and exploit error-based and stacked queries SQL injection types only. The default value is `BEUSTQ`. 
+例如,你可以提供`ES`如果你仅仅想要测试并利用基于错误和堆叠查询SQL资料隐码类型.这个默认值是`BEUSTQ`. 
 
-Note that the string must include stacked queries technique letter, `S`, when you want to access the file system, takeover the operating system or access Windows registry hives. 
+注意,当你想要通过文档系统、接管运行系统或者通过Windows注册中心时,字符串必须包括堆叠的查询技术字母`S`. 
 
-### Seconds to delay the DBMS response for time-based blind SQL injection
+### 延迟对基于时间的盲SQL注入的DBMS响应
 
-Option: `--time-sec`
+选项: `--time-sec`
 
-It is possible to set the seconds to delay the response when testing for time-based blind SQL injection, by providing the `--time-sec` option followed by an integer. By default it's value is set to **5 seconds**. 
+当测试基于时间的盲注入SQL时,可以设置秒钟来延迟响应,通过提供跟随一个整数的`--time-sec`选项.默认情况下,它的值被设置为**5 seconds**. 
 
-### Number of columns in UNION query SQL injection
+### 联合查询SQL注入中的列数
 
-Option: `--union-cols`
+选项: `--union-cols`
 
-By default sqlmap tests for UNION query SQL injection technique using 1 to 10 columns. However, this range can be increased up to 50 columns by providing an higher `--level` value. See the relevant paragraph for more details. 
+默认情况下,sqlmap会使用1到10列来检测UNION查询SQL资料隐码技术.然而,这一范围可以被增加到50列通过提供一个更高级别的值.详情请参阅相关段落. 
 
-You can manually tell sqlmap to test for this type of SQL injection with a specific range of columns by providing the tool with the option `--union-cols` followed by a range of integers. For instance, `12-16` means tests for UNION query SQL injection by using 12 up to 16 columns. 
+您可以手动告诉sqlmap以特定范围的列来测试这种类型的SQL注入，通过提供该选项的工具—联合-cols，然后是一系列的整数。
+例如，12-16意味着使用12到16列的联合查询SQL注入测试. 
 
-### Character to use to test for UNION query SQL injection
+### 用于测试联合查询SQL注入的字符
 
-Option: `--union-char`
+选项: `--union-char`
 
-By default sqlmap tests for UNION query SQL injection technique using `NULL` character. However, by providing a higher `--level` value sqlmap will performs tests also with a random number because there are some corner cases where UNION query tests with `NULL` fail, whereas with a random integer they succeed.
+默认情况下,sqlmap会使用`NULL`字符来测试UNION查询SQL资料隐码技术.然而,通过提供一个更高级别的值,sqlmap将使用随机数进行测试,因为在某些临界情况下,UNION查询随着 `NULL` 的失败而测试.而使用一个随机整数则会成功.
 
-You can manually tell sqlmap to test for this type of SQL injection with a specific character by using option `--union-char` with desired character value (e.g. `--union-char 123`).
+你可以通过手动告诉sqlmap来测试这种类型的有一个特定的字符的SQL资料隐码,通过使用有期望字符值（e.g. `--union-char 123`）的选项`--union-char`.
 
-### Table to use in FROM part of UNION query SQL injection
+### 联合查询SQL注入中使用的表
 
-Option: `--union-from`
+选项: `--union-from`
 
-In some UNION query SQL injection cases there is a need to enforce the usage of valid and accessible table name in `FROM` clause. For example, Microsoft Access requires usage of such table. Without providing one UNION query SQL injection won't be able to perform correctly (e.g. `--union-from=users`).
+在一些UNION查询SQL资料隐码案例中,有必要在`FROM`子句中强制使用有效并且可访问的表名.例如,Microsoft Access需要使用这样的列表.如果不提供一个UNION查询,SQL资料隐码将不能正常运行（e.g. `--union-from=users`）.
 
-### DNS exfiltration attack
+### DNS漏出攻击
 
-Option: `--dns-domain`
+选项: `--dns-domain`
 
-DNS exfiltration SQL injection attack is described in paper [Data Retrieval over DNS in SQL Injection Attacks](http://arxiv.org/pdf/1303.3047.pdf), while presentation of it's implementation inside sqlmap can be found in slides [DNS exfiltration using sqlmap](http://www.slideshare.net/stamparm/dns-exfiltration-using-sqlmap-13163281).
+在论文 [Data Retrieval over DNS in SQL Injection Attacks](http://arxiv.org/pdf/1303.3047.pdf)中描述了DNS ex过滤SQL注入攻击, 在sqlmap中显示它的实现的方法可以在幻灯片 [DNS exfiltration using sqlmap](http://www.slideshare.net/stamparm/dns-exfiltration-using-sqlmap-13163281)中找到.
 
-If user is controlling a machine registered as a DNS domain server (e.g. domain `attacker.com`) he can turn on this attack by using this option (e.g. `--dns-domain attacker.com`). Prerequisites for it to work is to run a sqlmap with `Administrator` privileges (usage of privileged port `53`) and that one normal (blind) technique is available for exploitation. That's solely the purpose of this attack is to speed up the process of data retrieval in case that at least one technique has been identified (in best case time-based blind). In case that error-based blind or UNION query techniques are available it will be skipped as those are preferred ones by default. 
+如果用户正在控制一个注册为DNS domain server (e.g. domain `attacker.com`)的机器，他可以通过此选项 (e.g. `--dns-domain attacker.com`)打开攻击.它工作的先决条件是运行一个`Administrator` 特权 (usage of privileged port `53`)的sqlmap.并且一个寻常的 (blind)技术可以用于开发.这次攻击的唯一目标是加速数据检索的过程以防至少有一种技术被识别（最好的情况是基于时间的blind）.如果出现error-based blind 或 UNION查询技术，那么它将被跳过，因为它们是默认引用的.. 
 
-### Second-order attack
+### 二阶攻击
 
-Option: `--second-order`
+选项: `--second-order`
 
-Second-order SQL injection attack is an attack where result(s) of an injected payload in one vulnerable page is shown (reflected) at the other (e.g. frame). Usually that's happening because of database storage of user provided input at the original vulnerable page.
+二阶SQL资料隐码攻击是一种在一个脆弱页面上的注入有效载荷的结果被显示(reflected) 在另一个(e.g. frame)上. 通常情况下是因为数据库存储的用户在原始的脆弱页面上提供了输入.
 
-You can manually tell sqlmap to test for this type of SQL injection by using option `--second-order` with the URL address of the web page where results are being shown.
+你可以通过使用有着显示结果的URL地址页面的选项`--second-order`来手动告诉sqlmap去测试这种类型的SQL资料隐码n.
 
 ## Fingerprint
 

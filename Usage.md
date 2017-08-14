@@ -406,47 +406,47 @@ $ python sqlmap.py -u "http://www.target.com/vuln.php" --data="query=foobar;id=\
 
 Options and switch: `--cookie`，`--cookie-del`，`--load-cookies`和`--drop-set-cookie`
 
-These options and switches can be used in two situations:
+这些option和switch课用于两种情况：
 
-* The web application requires authentication based upon cookies and you have such data.
-* You want to detect and exploit SQL injection on such header values.
+* Web应用程序需要基于Cookie进行身份验证，你拥有此类数据。
+* 你想要检测和利用SQL注入这样的头值。
 
-Either reason brings you to need to send cookies with sqlmap requests, the steps to go through are the following:
+无论是什么原因使您需要发送带有sqlmap请求的cookie，请执行以下步骤：
 
-* Login to the application with your favourite browser.
-* Get the HTTP Cookie from the browser's preferences or from the HTTP proxy screen and copy to the clipboard.
-* Go back to your shell and run sqlmap by pasting your clipboard as value of the option `--cookie`.
+* 使用您最喜爱的浏览器登录到应用程序。
+* 从浏览器的首选项或HTTP代理屏幕获取HTTP Cookie，并复制到剪贴板。
+* 回到你的shell，将剪贴板中的内容作为选项`--cookie`的值运行sqlmap。
 
-Note that the HTTP `Cookie` header values are usually separated by a `;` character, **not** by an `&`. sqlmap can recognize these as separate sets of `parameter=value` too, as well as GET and POST parameters. In case that the separation character is other than `;` it can be specified by using option `--cookie-del`.
+请注意，HTTP“Cookie”头值通常由`;`字符分隔，**不是**由`＆`分隔。 sqlmap可以将它们识别为单独的`parameter = value`集，以及GET和POST参数。如果分离字符不是`;`，可以使用option`--cookie-del`指定。
 
-If at any time during the communication, the web application responds with `Set-Cookie` headers, sqlmap will automatically use its value in all further HTTP requests as the `Cookie` header. sqlmap will also automatically test those values for SQL injection. This can be avoided by providing the switch `--drop-set-cookie` - sqlmap will ignore any coming `Set-Cookie` header.
+在通信期间，Web应用程序使用“Set-Cookie”头响应，sqlmap将自动将其所有其他HTTP请求中的值用作“Cookie”头。 sqlmap还将自动测试这些值以进行SQL注入。这可以通过提供switch`--drop-set-cookie`来避免——sqlmap将忽略任何即将到来的“Set-Cookie”头。
 
-Vice versa, if you provide a HTTP `Cookie` header with option `--cookie` and the target URL sends an HTTP
-`Set-Cookie` header at any time, sqlmap will ask you which set of cookies to use for the following HTTP requests.
+反之亦然，如果您提供一个带有`--cookie`选项的HTTP`Cookie`头，目标URL发送随时一个HTTP
+`Set-Cookie`标题，sqlmap会询问你使用哪一组cookie用于以下HTTP请求。
 
-There is also an option `--load-cookies` which can be used to provide a special file containing Netscape/wget formatted cookies.
+还有一个option`--load-cookies'可用于提供包含Netscape / wget格式化的cookie的特殊文件。
 
-Note that also the HTTP `Cookie` header is tested against SQL injection if the `--level` is set to **2** or above. Read below for details.
+请注意，如果`--level`设置为**2**或更高版本，那么HTTP`Cookie`标头也将针对SQL注入进行测试。详情请看下面。
 
 ### HTTP `User-Agent`头
 
 Option and switch: `--user-agent` and `--random-agent`
 
-By default sqlmap performs HTTP requests with the following `User-Agent` header value:
+默认情况下，sqlmap使用以下`User-Agent`头值执行HTTP请求：
 
     sqlmap/1.0-dev-xxxxxxx (http://sqlmap.org)
 
-However, it is possible to fake it with the option `--user-agent` by providing custom User-Agent as the option's argument.
+但是，可以通过提供自定义User-Agent作为选项的参数，使用option`--user-agent`伪造它。
 
-Moreover, by providing the switch `--random-agent`, sqlmap will randomly select a `User-Agent` from the `./txt/user-agents.txt` textual file and use it for all HTTP requests within the session.
+此外，通过提供交换机`--random-agent`，sqlmap将从`./ txt / user-agents.txt`文本文件中随机选择一个`User-Agent`，并将其用于会话中的所有HTTP请求。
 
-Some sites perform a server-side check of HTTP `User-Agent` header value and fail the HTTP response if a valid `User-Agent` is not provided, its value is not expected or is blacklisted by a web application firewall or similar intrusion prevention system. In this case sqlmap will show you a message as follows:
+某些站点执行HTTP`User-Agent`头值的服务器端检查，如果没有提供有效的`User-Agent`，其值不是预期的或被Web应用程序防火墙或类似的入侵黑名单，则HTTP响应失败预防系统。在这种情况下，sqlmap会显示如下消息：
 
     [hh:mm:20] [ERROR] the target URL responded with an unknown HTTP status code, try to 
     force the HTTP User-Agent header with option --user-agent or --random-agent
 
-Note that also the HTTP `User-Agent` header is tested against SQL injection if the `--level` is set to **3** or above.
-Read below for details.
+请注意，如果`--level`设置为** 3 **或更高版本，那么HTTP`User-Agent`标头也将针对SQL注入进行测试。
+详情请看下面。
 
 ### HTTP `Host`头
 
@@ -454,21 +454,21 @@ Option: `--host`
 
 你可以自己设置HTTP `Host`头的值。默认情况下，HTTP `Host`头是由目标URL解析而来的。
 
-Note that also the HTTP `Host` header is tested against SQL injection if the `--level` is set to **5**. Read below for details.
+请注意，如果`--level'设置为**5**，那么HTTP`Host`标头也将针对SQL注入进行测试。详情请看下面。
 
 ### HTTP `Referer`头
 
 Option: `--referer`
 
-It is possible to fake the HTTP `Referer` header value. By default **no** HTTP `Referer` header is sent in HTTP requests if not explicitly set.
+可以伪造HTTP`Referer`头值。 默认情况下，如果未明确设置HTTP请求，则在HTTP请求中发送**非**HTTP`Referer头`。
 
-Note that also the HTTP `Referer` header is tested against SQL injection if the `--level` is set to **3** or above. Read below for details.
+请注意，如果`--level`设置为**3**或更高版本，那么HTTP`Referer`标头也将针对SQL注入进行测试。 详情请看下面。
 
 ### 其余HTTP头
 
 Option: `--headers`
 
-It is possible to provide extra HTTP headers by setting the option `--headers`. Each header must be separated by a newline and it is much easier to provide them from the configuration INI file. You can take a look at the sample `sqlmap.conf` file for such case.
+可以通过设置“--headers”选项来提供额外的HTTP头。 每个标题必须用换行符分隔，并且从配置INI文件中更容易地提供它们。 你可以看一下这个例子的`sqlmap.conf`文件。
 
 示例（对一个MySQL目标的运行结果）：
 
@@ -514,17 +514,17 @@ Connection: close
 
 Options: `--auth-type`和`--auth-cred`
 
-These options can be used to specify which HTTP protocol authentication back-end web server implements and the valid credentials to be used to perform all HTTP requests to the target application.
+这些选项可用于指定哪个HTTP协议身份验证后端Web服务器实现，以及用于执行对目标应用程序的所有HTTP请求的有效凭据。
 
-The three supported HTTP protocol authentication mechanisms are:
+三种支持的HTTP协议认证机制有：
 
 * `Basic`
 * `Digest`
 * `NTLM`
 
-While the credentials' syntax is `username:password`.
+认证的语法是`username：password`。
 
-Example of valid syntax:
+有效语法示例：
 
 ```
 $ python sqlmap.py -u "http://192.168.136.131/sqlmap/mysql/basic/get_int.php?id\
@@ -535,37 +535,36 @@ $ python sqlmap.py -u "http://192.168.136.131/sqlmap/mysql/basic/get_int.php?id\
 
 Option: `--auth-file`
 
-This option should be used in cases when the web server requires proper client-side certificate and a private key for authentication. Supplied value should be a PEM formatted `key_file` that contains your certificate and a private key.
+在Web服务器需要适当的客户端证书和用于验证的私钥的情况下，应使用此选项。 提供的值应该是包含您的证书和私钥的PEM格式化的`key_file`。
 
 
 ### Ignore HTTP error 401 (Unauthorized)
 
 Switch `--ignore-401`
 
-In case that you want to test the site that occasionally returns HTTP error 401 (Unauthorized), while you want to ignore it and continue tests without providing proper credentials, you can use switch `--ignore-401`
+如果您想要测试该站点偶尔返回HTTP错误401（未经授权），当您想忽略它，并继续测试而不提供正确的凭据，您可以使用switch`--ignore-401`。
 
 ### HTTP(S)代理
 
 Options and switch: `--proxy`, `--proxy-cred`, `--proxy-file` and `--ignore-proxy`
 
-It is possible to provide an HTTP(S) proxy address to pass by the HTTP(S) requests to the target URL with option `--proxy`. The syntax of HTTP(S) proxy value is `http://url:port`.
+可以提供HTTP（S）代理地址，以通过HTTP（S）请求传递给具有option`--proxy`的目标URL。 HTTP（S）代理值的语法是`http：// url：port`。
 
-If the HTTP(S) proxy requires authentication, you can provide the credentials in the format `username:password` to the
-option `--proxy-cred`.
+如果HTTP（S）代理需要身份验证，则可以以“username：password”格式提供认证option`--proxy-cred`。
 
-In case that you want to use (disposable) proxy list, skipping to the next proxy on any sign of a connection problem (e.g. blocking of invasive IP address), option `--proxy-file` can be used by providing filename of a file containing bulk list of proxies.
+如果您想使用（一次性）代理列表，则在连接问题的任何迹象（例如阻止侵入式IP地址）上跳过下一个代理，可以使用选项`--proxy-file`来提供文件名 包含批量代理列表的文件。
 
-Switch `--ignore-proxy` should be used when you want to run sqlmap against a target part of a local area network by ignoring the system-wide set HTTP(S) proxy server setting.
+当您想要通过忽略全系统设置的HTTP（S）代理服务器设置对局域网的目标部分运行sqlmap时，应使用switch`--ignore-proxy`。
 
 ### Tor anonymity network
 
 Switches and options: `--tor`, `--tor-port`, `--tor-type` and `--check-tor`
 
-If, for any reason, you need to stay anonymous, instead of passing by a single predefined HTTP(S) proxy server, you can configure a [Tor client](http://www.torproject.org/) together with [Privoxy](http://www.privoxy.org) (or similar) on your machine as explained in [Tor installation guides](https://www.torproject.org/docs/installguide.html.en). Then you can use a switch `--tor` and sqlmap will try to automatically set Tor proxy connection settings.
+如果由于任何原因，您需要匿名，而不是通过单个预定义的HTTP（S）代理服务器，您可以将[Tor客户端](http://www.torproject.org/)与[Privoxy](http://www.privoxy.org)（或类似的），如[Tor安装指南](https://www.torproject.org/docs/installguide.html.en)中所述。那么你可以使用一个switch`--tor`，而sqlmap会尝试自动设置Tor代理连接设置。
 
-In case that you want to manually set the type and port of used Tor proxy, you can do it with options `--tor-type` and `--tor-port` (e.g. `--tor-type=SOCKS5 --tor-port 9050`).
+如果要手动设置Tor代理的类型和端口，可以使用`--tor-type`和`--tor-port`（例如`--tor-type = SOCKS5 - tor-port 9050`）。
 
-You are strongly advised to use `--check-tor` occasionally to be sure that everything was set up properly. There are cases when Tor bundles (e.g. Vidalia) come misconfigured (or reset previously set configuration) giving you a false sense of anonymity. Using this switch sqlmap will check that everything works as expected by sending a single request to an official [Are you using Tor?](https://check.torproject.org/) page before any target requests. In case that check fails, sqlmap will warn you and abruptly exit.
+强烈建议您不经常地使用`--check-tor'来确保一切都正确设置。有些情况下，Tor捆绑（例如Vidalia）配置错误（或重置先前设置的配置），从而使您具有虚假的匿名感。在任何目标请求之前，使用此开关sqlmap将检查一切是否按预期发送单个请求到官方[您正在使用Tor？](https://check.torproject.org/)页面。如果检查失败，sqlmap将警告您并突然退出。
 
 ### 每个HTTP请求的时间间隔
 
